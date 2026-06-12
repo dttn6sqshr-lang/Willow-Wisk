@@ -57,15 +57,15 @@ body::before{
   to{transform:translateY(-300px);}
 }
 
-/* MAIN CARD */
+/* BIGGER CARD */
 .card{
-  width:420px;
-  padding:35px;
-  border-radius:28px;
-  background:rgba(255,255,255,0.25);
+  width:520px;
+  padding:50px;
+  border-radius:32px;
+  background:rgba(255,255,255,0.28);
   backdrop-filter:blur(18px);
   text-align:center;
-  box-shadow:0 15px 40px rgba(0,0,0,0.1);
+  box-shadow:0 18px 50px rgba(0,0,0,0.12);
   animation: fadeUp 0.6s ease;
 }
 
@@ -76,64 +76,59 @@ body::before{
 
 /* cupcake */
 .cupcake{
-  font-size:80px;
+  font-size:95px;
   animation: float 3.5s ease-in-out infinite;
 }
 
 @keyframes float{
   0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-8px);}
+  50%{transform:translateY(-10px);}
 }
 
 /* title */
 .title{
-  font-size:40px;
+  font-size:48px;
   margin:10px 0 5px 0;
   font-weight:bold;
 }
 
 /* subtitle */
 .subtitle{
-  font-size:14px;
+  font-size:15px;
   opacity:0.75;
-  margin-bottom:20px;
+  margin-bottom:22px;
 }
 
-/* bowl accent */
+/* bowl */
 .bowl{
-  font-size:55px;
-  margin:10px 0 20px 0;
+  font-size:65px;
+  margin:10px 0 25px 0;
   opacity:0.9;
 }
 
-/* buttons grid */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:14px;
 }
 
-/* buttons */
+/* UNIFIED BUTTON STYLE (ONE COLOR ONLY) */
 .btn{
-  padding:14px;
-  border-radius:16px;
+  padding:16px;
+  border-radius:18px;
   text-decoration:none;
-  color:#4b3b2f;
-  background:rgba(255,255,255,0.35);
-  backdrop-filter:blur(10px);
-  transition:0.25s;
+  color:white;
+  background:#7C9D96;
   font-weight:500;
+  transition:0.25s;
+  display:block;
 }
 
 .btn:hover{
-  transform:scale(1.05);
+  transform:scale(1.06);
+  background:#6f8f89;
 }
-
-/* accent buttons */
-.status{background:linear-gradient(135deg,#A8BFA3,#7C9D96);}
-.activity{background:linear-gradient(135deg,#8B6F5A,#F7F2EA);}
-.login{background:linear-gradient(135deg,#F7F2EA,#DCE8D7);}
-.discord{background:linear-gradient(135deg,#7C9D96,#A8BFA3);}
 </style>
 </head>
 
@@ -148,10 +143,10 @@ body::before{
   <div class="bowl">🥣</div>
 
   <div class="grid">
-    <a class="btn status" href="/status">Status</a>
-    <a class="btn activity" href="/activity">Activity</a>
-    <a class="btn login" href="/login">Login</a>
-    <a class="btn discord" href="https://discord.com/oauth2/authorize?client_id=1514467728390623343&permissions=8&scope=bot%20applications.commands">
+    <a class="btn" href="/status">Status</a>
+    <a class="btn" href="/activity">Activity</a>
+    <a class="btn" href="/login">Login</a>
+    <a class="btn" href="https://discord.com/oauth2/authorize?client_id=1514467728390623343&permissions=8&scope=bot%20applications.commands">
       Add to Discord
     </a>
   </div>

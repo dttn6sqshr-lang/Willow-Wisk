@@ -1,3 +1,7 @@
-export default function Component() {
-  return null;
+export default function CategorySelector() {
+  return (
+    <div>
+      Select Category
+    </div>
+  );
 }

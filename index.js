@@ -119,27 +119,54 @@ app.get("/", (req, res) => {
   <h1>Willow Wisk</h1>
   <p>Your cozy Discord helper for servers, tickets, moderation & more</p>
 
-  <div class="grid">
+  <!-- ACTION LAYOUT -->
+  <div style="
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:30px;
+    flex-wrap:wrap;
+  ">
 
-    <a class="card" href="/status">
-      <div class="title">Status</div>
-      <div class="desc">Check if the bot is online</div>
-    </a>
+    <!-- LEFT COLUMN -->
+    <div style="display:flex; flex-direction:column; gap:15px;">
 
-    <a class="card" href="/activity">
-      <div class="title">Activity</div>
-      <div class="desc">View recent bot logs</div>
-    </a>
+      <a class="card" href="/status">
+        <div class="title">Status</div>
+        <div class="desc">Check bot health</div>
+      </a>
 
-    <a class="card" href="/login">
-      <div class="title">Login</div>
-      <div class="desc">Access your dashboard</div>
-    </a>
+      <a class="card" href="/login">
+        <div class="title">Login</div>
+        <div class="desc">Access dashboard</div>
+      </a>
 
-    <a class="card full" href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_ID&permissions=8&scope=bot%20applications.commands">
-      <div class="title">Add to Discord</div>
-      <div class="desc">Invite Willow Wisk to your server</div>
-    </a>
+    </div>
+
+    <!-- CENTER MIXING BOWL -->
+    <div style="
+      font-size:70px;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+    ">
+      🥣
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div style="display:flex; flex-direction:column; gap:15px;">
+
+      <a class="card" href="/activity">
+        <div class="title">Activity</div>
+        <div class="desc">View logs</div>
+      </a>
+
+      <a class="card" href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_ID&permissions=8&scope=bot%20applications.commands">
+        <div class="title">Add to Discord</div>
+        <div class="desc">Invite the bot</div>
+      </a>
+
+    </div>
 
   </div>
 

@@ -65,11 +65,20 @@ app.get("/", (req, res) => {
       margin-bottom: 10px;
     }
 
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0px); }
-    }
+ @keyframes float {
+  0% {
+    transform: translateY(0px);
+    filter: drop-shadow(0 10px 18px rgba(0,0,0,0.12));
+  }
+  50% {
+    transform: translateY(-6px);
+    filter: drop-shadow(0 18px 25px rgba(0,0,0,0.18));
+  }
+  100% {
+    transform: translateY(0px);
+    filter: drop-shadow(0 10px 18px rgba(0,0,0,0.12));
+  }
+}
 
     h1 {
       margin: 0;
@@ -89,22 +98,28 @@ app.get("/", (req, res) => {
       gap: 15px;
     }
 
-    .card {
-      background: rgba(255,255,255,0.25);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 18px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      text-decoration: none;
-      color: #5a4638;
-    }
+  .card {
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(16px);
+  border-radius: 20px;
+  padding: 18px;
+  cursor: pointer;
 
-    .card:hover {
-      transform: translateY(-5px);
-      background: rgba(255,255,255,0.35);
-    }
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+              background 0.35s ease,
+              box-shadow 0.35s ease;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  text-decoration: none;
+  color: #5a4638;
+  will-change: transform;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  background: rgba(255,255,255,0.32);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+}
 
     .full {
       grid-column: span 2;

@@ -168,6 +168,85 @@ app.get("/", (req, res) => {
   `);
 });
 
+app.get("/docs", (req, res) => {
+  res.send(`
+  <html>
+  <head>
+    <title>Documentation</title>
+  </head>
+
+  <body style="font-family:Arial; padding:40px; background:#F7F2EA;">
+
+    <h1>📒 Willow Wisk Documentation</h1>
+
+    <p>Welcome to the bot documentation.</p>
+
+    <h3>Getting Started</h3>
+    <ul>
+      <li>Invite the bot</li>
+      <li>Set up tickets</li>
+      <li>Configure verification</li>
+    </ul>
+
+    <br>
+    <a href="/">← Back Home</a>
+
+  </body>
+  </html>
+  `);
+});
+
+app.get("/health", (req, res) => {
+  res.send(`
+  <html>
+  <head>
+    <title>Bot Health</title>
+  </head>
+
+  <body style="font-family:Arial; padding:40px; background:#EAF4F1;">
+
+    <h1>ﮩ٨ـ Bot Status</h1>
+
+    <p>Status: Online</p>
+    <p>Latency: Stable</p>
+    <p>Discord Connection: Active</p>
+
+    <br>
+    <a href="/">← Back Home</a>
+
+  </body>
+  </html>
+  `);
+});
+
+app.get("/activity", (req, res) => {
+  res.send(`
+  <html>
+  <head>
+    <title>Activity</title>
+  </head>
+
+  <body style="font-family:Arial; padding:40px; background:#F7F2EA;">
+
+    <h1>◔ Recent Activity</h1>
+
+    <p>No activity logs yet.</p>
+
+    <ul>
+      <li>Tickets created: 0</li>
+      <li>Verifications: 0</li>
+      <li>Commands used: 0</li>
+    </ul>
+
+    <br>
+    <a href="/">← Back Home</a>
+
+  </body>
+  </html>
+  `);
+});
+
+
 // BOT
 const client = new Client({
   intents: [

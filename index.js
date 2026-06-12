@@ -11,9 +11,26 @@ app.get("/", (req, res) => {
       <head>
         <title>Willow Wisk Dashboard</title>
       </head>
-      <body style="font-family: Arial; text-align:center; padding-top:50px;">
+
+      <body style="font-family: Arial; padding: 40px;">
+
         <h1>Willow Wisk Dashboard</h1>
-        <p>Status: Online</p>
+
+        <hr>
+
+        <h3>Navigation</h3>
+
+        <a href="/dashboard">Dashboard</a>
+        <br><br>
+
+        <a href="/tickets">Tickets</a>
+        <br><br>
+
+        <a href="/verification">Verification</a>
+        <br><br>
+
+        <a href="/settings">Settings</a>
+
       </body>
     </html>
   `);

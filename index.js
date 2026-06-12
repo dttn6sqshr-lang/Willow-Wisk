@@ -297,9 +297,168 @@ a{
 ========================= */
 app.get("/activity", (req, res) => {
   res.send(`
-    <h1>Activity</h1>
-    <p>No recent logs yet.</p>
-    <a href="/">Back</a>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Activity</title>
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,sans-serif;
+  background: linear-gradient(135deg,#F7F2EA,#A8BFA3,#7C9D96);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#5a4638;
+  overflow:hidden;
+}
+
+/* soft background glow */
+.bg{
+  position:fixed;
+  inset:0;
+  background: radial-gradient(circle at center,
+  rgba(255,255,255,0.18), transparent 60%);
+  animation: drift 8s ease-in-out infinite alternate;
+}
+
+@keyframes drift{
+  0%{transform:scale(1);}
+  100%{transform:scale(1.05);}
+}
+
+/* main panel */
+.card{
+  position:relative;
+  z-index:2;
+  width:380px;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(14px);
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  animation: fadeUp .7s ease;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* animated whisk */
+.whisk{
+  font-size:54px;
+  margin-bottom:10px;
+  animation: float 3.5s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(0px) rotate(0deg);}
+  50%{transform:translateY(-7px) rotate(3deg);}
+  100%{transform:translateY(0px) rotate(0deg);}
+}
+
+.title{
+  font-size:28px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+/* fake activity logs */
+.log-box{
+  margin-top:18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.log{
+  background: rgba(255,255,255,0.18);
+  padding:12px;
+  border-radius:16px;
+  font-size:14px;
+  text-align:left;
+  transition:.3s;
+}
+
+.log:hover{
+  transform:translateY(-2px);
+  background: rgba(255,255,255,0.28);
+}
+
+/* online pulse */
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  display:inline-block;
+  background:#4ade80;
+  margin-right:6px;
+  box-shadow:0 0 10px rgba(74,222,128,0.6);
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.3);}
+  100%{transform:scale(1);}
+}
+
+.back{
+  display:inline-block;
+  margin-top:20px;
+  text-decoration:none;
+  color:#5a4638;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="card">
+
+<div class="whisk">🍰</div>
+
+<div class="title">Recent Activity</div>
+
+<div class="log-box">
+
+  <div class="log">
+    <span class="dot"></span> Bot started successfully
+  </div>
+
+  <div class="log">
+    Ticket system initialized
+  </div>
+
+  <div class="log">
+    Automod protection active
+  </div>
+
+  <div class="log">
+    No recent moderation actions
+  </div>
+
+</div>
+
+<a class="back" href="/">← Back Home</a>
+
+</div>
+
+</body>
+</html>
   `);
 });
 

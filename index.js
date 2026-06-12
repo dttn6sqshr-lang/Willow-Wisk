@@ -7,62 +7,102 @@ const PORT = 25414;
 // WEBSITE
 app.get("/", (req, res) => {
   res.send(`
+<!DOCTYPE html>
 <html>
 <head>
   <title>Willow Wisk</title>
 
   <style>
-    body{
-      margin:0;
+    body {
+      margin: 0;
+      height: 100vh;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #F7F2EA, #7C9D96, #A8BFA3);
-      min-height:100vh;
-      color:#4b3a2f;
+      overflow: hidden;
+
+      /* bakery gradient */
+      background: linear-gradient(135deg, #F7F2EA, #A8BFA3, #7C9D96);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #5a4638;
     }
 
-    .hero{
-      text-align:center;
-      padding-top:80px;
+    /* soft floating particles */
+    .bg-glow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.25), transparent 60%);
+      pointer-events: none;
     }
 
-    .hero h1{
-      font-size:52px;
-      margin:0;
+    .container {
+      text-align: center;
+      z-index: 2;
+      width: 90%;
+      max-width: 600px;
     }
 
-    .cards{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:25px;
-      margin-top:60px;
+    .mascot {
+      font-size: 70px;
+      animation: float 3s ease-in-out infinite;
+      margin-bottom: 10px;
     }
 
-    .card{
-      width:220px;
-      padding:25px;
-      border-radius:18px;
-      background: rgba(255,255,255,0.22);
-      backdrop-filter: blur(18px);
-      text-align:center;
-      transition:0.3s;
-      cursor:pointer;
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
     }
 
-    .card:hover{
-      transform: translateY(-6px);
+    h1 {
+      margin: 0;
+      font-size: 42px;
+      font-weight: bold;
     }
 
-    a{
-      text-decoration:none;
-      color:#4b3a2f;
-      font-weight:bold;
+    p {
+      margin-top: 10px;
+      opacity: 0.8;
     }
 
-    .small{
-      font-size:13px;
-      opacity:0.8;
-      margin-top:10px;
+    .grid {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      text-decoration: none;
+      color: #5a4638;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.35);
+    }
+
+    .full {
+      grid-column: span 2;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .desc {
+      font-size: 13px;
+      opacity: 0.8;
+      margin-top: 5px;
     }
 
   </style>
@@ -70,65 +110,43 @@ app.get("/", (req, res) => {
 
 <body>
 
-  <div class="hero">
-    <h1>Willow Wisk</h1>
-    <p>All-in-One Discord Server Manager</p>
+<div class="bg-glow"></div>
+
+<div class="container">
+
+  <div class="mascot">🧁</div>
+
+  <h1>Willow Wisk</h1>
+  <p>Your cozy Discord helper for servers, tickets, moderation & more</p>
+
+  <div class="grid">
+
+    <a class="card" href="/status">
+      <div class="title">Status</div>
+      <div class="desc">Check if the bot is online</div>
+    </a>
+
+    <a class="card" href="/activity">
+      <div class="title">Activity</div>
+      <div class="desc">View recent bot logs</div>
+    </a>
+
+    <a class="card" href="/login">
+      <div class="title">Login</div>
+      <div class="desc">Access your dashboard</div>
+    </a>
+
+    <a class="card full" href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_ID&permissions=8&scope=bot%20applications.commands">
+      <div class="title">Add to Discord</div>
+      <div class="desc">Invite Willow Wisk to your server</div>
+    </a>
+
   </div>
 
-  <div class="cards">
-
-    <div class="card">
-      <h3>Bot Status</h3>
-      <p>Check if Willow Wisk is online and stable.</p>
-      <div class="small"><a href="/status">View Status</a></div>
-    </div>
-
-    <div class="card">
-      <h3>Activity</h3>
-      <p>See recent actions, logs, and updates.</p>
-      <div class="small"><a href="/activity">View Activity</a></div>
-    </div>
-
-    <div class="card">
-      <h3>Login</h3>
-      <p>Access your server dashboard.</p>
-      <div class="small"><a href="/login">Login with Discord</a></div>
-    </div>
-
-    <div class="card">
-      <h3>Add to Discord</h3>
-      <p>Invite Willow Wisk to your server.</p>
-      <div class="small"><a href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_ID&permissions=8&scope=bot%20applications.commands">Invite Bot</a></div>
-    </div>
-
-  </div>
+</div>
 
 </body>
 </html>
-  `);
-});
-
-app.get("/status", (req, res) => {
-  res.send(`
-  <h1>Bot Status</h1>
-  <p>Willow Wisk is currently online and running.</p>
-  <a href="/">Back</a>
-  `);
-});
-
-app.get("/activity", (req, res) => {
-  res.send(`
-  <h1>Activity</h1>
-  <p>No recent activity yet.</p>
-  <a href="/">Back</a>
-  `);
-});
-
-app.get("/login", (req, res) => {
-  res.send(`
-  <h1>Login</h1>
-  <p>Discord OAuth system will be added soon.</p>
-  <a href="/">Back</a>
   `);
 });
 

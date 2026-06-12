@@ -147,11 +147,6 @@ app.get("/", (req, res) => {
           <p>Build custom ticket systems for your server.</p>
           <div class="learn">Learn More</div>
         </div>
-        
-a{
-  text-decoration:none;
-  color:#4b3a2f;
-}
 
         <div class="card">
           <h3>Verification</h3>

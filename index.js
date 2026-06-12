@@ -15,17 +15,16 @@ app.use(session({
 }));
 
 /* =========================
-   DISCORD CONFIG (HARDCODED)
+   DISCORD CONFIG
 ========================= */
 const CLIENT_ID = "1514467728390623343";
-const CLIENT_SECRET = "YOUR_NEW_CLIENT_SECRET"; // replace this
+const CLIENT_SECRET = "YOUR_NEW_CLIENT_SECRET";
 const REDIRECT_URI = "https://willowwisk.apps.bot-hosting.cloud/callback";
 
 /* =========================
-   HOME PAGE
+   HOME PAGE (BAKERY WORLD)
 ========================= */
 app.get("/", (req, res) => {
-
   res.send(`
 <!DOCTYPE html>
 <html>
@@ -37,128 +36,105 @@ body {
   margin:0;
   height:100vh;
   font-family: Arial;
-  background: linear-gradient(135deg,#F7F2EA,#A8BFA3,#7C9D96);
-  display:flex;
-  justify-content:center;
-  align-items:center;
   overflow:hidden;
-  color:#5a4638;
+  color:#4b3b2f;
 }
 
-/* sparkles */
+/* dreamy bakery background */
+body {
+  background: radial-gradient(circle at top,
+  #F7F2EA, #A8BFA3, #7C9D96);
+}
+
+/* floating sparkles */
 body::before {
   content:"";
   position:fixed;
   inset:0;
   background-image: radial-gradient(white 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-size: 45px 45px;
   opacity:0.12;
-  animation: move 20s linear infinite;
+  animation: drift 25s linear infinite;
 }
 
-@keyframes move {
+@keyframes drift {
   from {transform:translateY(0);}
-  to {transform:translateY(-200px);}
+  to {transform:translateY(-300px);}
 }
 
-.container {
+.center {
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
   text-align:center;
-  z-index:2;
 }
 
 .cupcake {
-  font-size:64px;
+  font-size:70px;
   animation: float 3.5s ease-in-out infinite;
 }
 
 @keyframes float {
-  0%{transform:translateY(0);}
-  50%{transform:translateY(-8px);}
-  100%{transform:translateY(0);}
+  0%,100% {transform:translateY(0);}
+  50% {transform:translateY(-10px);}
 }
 
 h1 {
   margin:0;
-  font-size:42px;
-}
-
-.subtitle {
-  opacity:0.8;
-  margin-bottom:30px;
-}
-
-.layout {
-  display:flex;
-  gap:25px;
-  justify-content:center;
-  align-items:center;
-}
-
-.side {
-  display:flex;
-  flex-direction:column;
-  gap:14px;
+  font-size:44px;
 }
 
 .bowl {
-  font-size:70px;
-  animation: floatBowl 4s ease-in-out infinite;
+  font-size:72px;
+  margin-top:25px;
+  animation: float2 4s ease-in-out infinite;
 }
 
-@keyframes floatBowl {
-  0%{transform:translateY(0);}
-  50%{transform:translateY(-6px);}
-  100%{transform:translateY(0);}
+@keyframes float2 {
+  0%,100% {transform:translateY(0);}
+  50% {transform:translateY(-8px);}
 }
 
-.card {
-  padding:16px;
-  border-radius:18px;
+.menu {
+  margin-top:25px;
+  display:flex;
+  gap:30px;
+}
+
+.menu a {
   text-decoration:none;
-  color:#5a4638;
-  background:rgba(255,255,255,0.25);
-  backdrop-filter:blur(12px);
+  font-weight:bold;
+  color:#4b3b2f;
+  font-size:15px;
+  opacity:0.8;
   transition:0.3s;
 }
 
-.card:hover {
-  transform:translateY(-5px);
+.menu a:hover {
+  opacity:1;
+  transform:scale(1.1);
 }
-
-.status {background:linear-gradient(135deg,#A8BFA3,#7C9D96);}
-.login {background:linear-gradient(135deg,#F7F2EA,#DCE8D7);}
-.activity {background:linear-gradient(135deg,#8B6F5A,#F7F2EA);}
-.invite {background:linear-gradient(135deg,#7C9D96,#A8BFA3);}
-
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="center">
 
-<div class="cupcake">🧁</div>
-<h1>Willow Wisk</h1>
-<p class="subtitle">Tickets • Moderation • Logs • Reaction Roles</p>
-
-<div class="layout">
-
-  <div class="side">
-    <a class="card status" href="/status">Status</a>
-    <a class="card login" href="/login">Login</a>
-  </div>
+  <div class="cupcake">🧁</div>
+  <h1>Willow Wisk</h1>
+  <p>Welcome to the bakery system</p>
 
   <div class="bowl">🥣</div>
 
-  <div class="side">
-    <a class="card activity" href="/activity">Activity</a>
-    <a class="card invite"
-      href="https://discord.com/oauth2/authorize?client_id=1514467728390623343&permissions=8&scope=bot%20applications.commands">
-      Add to Discord
-    </a>
+  <div class="menu">
+    <a href="/status">Status</a>
+    <a href="/activity">Activity</a>
+    <a href="/login">Login</a>
+    <a href="https://discord.com/oauth2/authorize?client_id=1514467728390623343&permissions=8&scope=bot%20applications.commands">Add to Discord</a>
   </div>
-
-</div>
 
 </div>
 
@@ -168,32 +144,182 @@ h1 {
 });
 
 /* =========================
-   LOGIN PAGE
+   STATUS PAGE (COOL BLUE GREEN ROOM)
+========================= */
+app.get("/status", (req, res) => {
+  res.send(`
+<!DOCTYPE html>
+<html>
+<head>
+<title>Status</title>
+
+<style>
+body {
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial;
+  color:white;
+  background: linear-gradient(135deg,#2f5f5f,#7C9D96,#A8BFA3);
+}
+
+.card {
+  background: rgba(255,255,255,0.15);
+  padding:40px;
+  border-radius:25px;
+  text-align:center;
+  backdrop-filter: blur(14px);
+}
+
+.dot {
+  width:10px;
+  height:10px;
+  background:#4ade80;
+  border-radius:50%;
+  display:inline-block;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%{transform:scale(1);}
+  50%{transform:scale(1.5);}
+  100%{transform:scale(1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>🟢 Bot Status</h1>
+  <p><span class="dot"></span> All systems operational</p>
+  <a href="/" style="color:white;">Back Home</a>
+</div>
+
+</body>
+</html>
+`);
+});
+
+/* =========================
+   ACTIVITY PAGE (WARM BAKERY ROOM)
+========================= */
+app.get("/activity", (req, res) => {
+  res.send(`
+<!DOCTYPE html>
+<html>
+<head>
+<title>Activity</title>
+
+<style>
+body {
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial;
+  background: linear-gradient(135deg,#8B6F5A,#F7F2EA,#A8BFA3);
+  color:#4b3b2f;
+}
+
+.card {
+  background: rgba(255,255,255,0.2);
+  padding:35px;
+  border-radius:20px;
+  backdrop-filter: blur(12px);
+  text-align:center;
+}
+
+.log {
+  margin-top:15px;
+  padding:10px;
+  background: rgba(255,255,255,0.25);
+  border-radius:12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Activity</h1>
+
+  <div class="log">Bot started successfully</div>
+  <div class="log">Ticket system ready</div>
+  <div class="log">No moderation actions yet</div>
+
+  <br>
+  <a href="/">Back Home</a>
+</div>
+
+</body>
+</html>
+`);
+});
+
+/* =========================
+   LOGIN PAGE (COZY ROOM)
 ========================= */
 app.get("/login", (req, res) => {
   res.send(`
-  <div style="text-align:center;font-family:Arial;
-  background:linear-gradient(135deg,#F7F2EA,#A8BFA3,#7C9D96);
-  height:100vh;display:flex;justify-content:center;align-items:center;">
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
 
-    <div style="background:rgba(255,255,255,0.25);
-    padding:30px;border-radius:20px;backdrop-filter:blur(12px)">
+<style>
+body {
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial;
+  background: linear-gradient(135deg,#F7F2EA,#DCE8D7,#A8BFA3);
+  color:#4b3b2f;
+}
 
-      <div style="font-size:60px">🥐</div>
-      <h2>Login</h2>
+.card {
+  text-align:center;
+  padding:40px;
+  border-radius:25px;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(14px);
+}
 
-      <a href="/auth/discord"
-      style="padding:12px 18px;background:#7C9D96;
-      color:white;text-decoration:none;border-radius:12px">
-      Continue with Discord
-      </a>
+button {
+  padding:12px 20px;
+  border:none;
+  border-radius:12px;
+  background:#7C9D96;
+  color:white;
+  cursor:pointer;
+}
+</style>
+</head>
 
-      <br><br>
-      <a href="/">Back</a>
+<body>
 
-    </div>
-  </div>
-  `);
+<div class="card">
+
+  <div style="font-size:60px;">🥐</div>
+
+  <h1>Login</h1>
+  <p>Continue with Discord</p>
+
+  <a href="/auth/discord">
+    <button>Login</button>
+  </a>
+
+</div>
+
+</body>
+</html>
+`);
 });
 
 /* =========================
@@ -233,21 +359,7 @@ app.get("/callback", async (req, res) => {
 });
 
 /* =========================
-   STATUS
-========================= */
-app.get("/status", (req, res) => {
-  res.send("<h1>🟢 Online</h1><a href='/'>Back</a>");
-});
-
-/* =========================
-   ACTIVITY
-========================= */
-app.get("/activity", (req, res) => {
-  res.send("<h1>Activity</h1><p>No logs yet.</p><a href='/'>Back</a>");
-});
-
-/* =========================
-   START
+   START SERVER
 ========================= */
 app.listen(PORT, () => {
   console.log("Willow Wisk running on port " + PORT);

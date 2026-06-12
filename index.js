@@ -158,6 +158,11 @@ body::before{
 `);
 });
 
+/* STATUS */
+app.get("/status", (req, res) => {
+  res.send("Status route is working 🧁");
+});
+
 /* ACTIVITY */
 app.get("/activity", (req, res) => {
   res.send(`

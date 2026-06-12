@@ -163,7 +163,11 @@ app.get("/", (req, res) => {
 
 <div class="container">
 
-  <h1>Willow Wisk</h1>
+  <h1 style="display:flex; align-items:center; justify-content:center; gap:10px;">
+  <span style="font-size:38px;">🧁</span>
+  Willow Wisk
+  <span style="font-size:38px;">🧁</span>
+</h1>
   <p>Manage tickets, moderation, logs, reaction roles & more</p>
 
   <div class="mascot-row">

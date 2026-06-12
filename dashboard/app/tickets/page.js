@@ -1,23 +1,7 @@
-import Sidebar from "../../components/sidebar";
-import Topbar from "../../components/topbar";
+---------------------------------------------------------
+Left Panel          | Center Builder | Right Settings
+---------------------------------------------------------
 
-export default function Tickets() {
-  return (
-    <div>
-      <Sidebar />
-      <Topbar />
-
-      Ticket Panel Builder
-
-      Button Builder
-
-      Ticket Categories
-
-      Ticket Permissions
-
-      Ticket Intro Messages
-
-      Ticket Analytics
-    </div>
-  );
-}
+Saved Panels        | Live Preview   | Panel Settings
+Buttons             | Embed Preview  | Button Settings
+Templates           | Ticket Flow    | Category Settings

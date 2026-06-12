@@ -13,12 +13,12 @@ app.get("/", (req, res) => {
 
     <style>
       body{
-        margin:0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #F7F2EA, #7C9D96, #A8BFA3);
-        min-height:100vh;
-        color:#4b3a2f;
-      }
+  margin:0;
+  font-family: Trebuchet MS, sans-serif;
+  background: linear-gradient(135deg, #F7F2EA, #7C9D96, #A8BFA3);
+  min-height:100vh;
+  color:#4b3a2f;
+}
 
       .navbar{
         display:flex;
@@ -33,13 +33,19 @@ app.get("/", (req, res) => {
         font-size:22px;
       }
 
-      .login{
-        padding:12px 28px;
-        border-radius:999px;
-        border:1px solid #F7F2EA;
-        background: rgba(255,255,255,0.18);
-        backdrop-filter: blur(14px);
-      }
+.login{
+  padding:12px 28px;
+  border-radius:999px;
+  border:1px solid white;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(20px);
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.login:hover{
+  transform:scale(1.05);
+}
 
       .hero{
         text-align:center;
@@ -51,13 +57,19 @@ app.get("/", (req, res) => {
       }
 
       .discord{
-        margin-top:20px;
-        display:inline-block;
-        padding:14px 30px;
-        border-radius:999px;
-        background: rgba(255,255,255,0.18);
-        backdrop-filter: blur(14px);
-      }
+  margin-top:20px;
+  display:inline-block;
+  padding:14px 35px;
+  border-radius:999px;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(20px);
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.discord:hover{
+  transform:scale(1.05);
+}
 
       .why{
         margin-top:120px;
@@ -73,12 +85,18 @@ app.get("/", (req, res) => {
       }
 
       .card{
-        width:260px;
-        padding:25px;
-        border-radius:20px;
-        background: rgba(255,255,255,0.18);
-        backdrop-filter: blur(14px);
-      }
+  width:260px;
+  padding:25px;
+  border-radius:22px;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(18px);
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.card:hover{
+  transform: translateY(-6px);
+}
 
       .learn{
         margin-top:20px;
@@ -90,12 +108,12 @@ app.get("/", (req, res) => {
 
     <div class="navbar">
 
-      <div class="left-nav">
-        <div>⾕</div>
-        <div>📒</div>
-        <div>ﮩ٨ـ</div>
-        <div>◔</div>
-      </div>
+  <div class="left-nav">
+  <div><a href="/">⾕</a></div>
+  <div><a href="/docs">📒</a></div>
+  <div><a href="/health">ﮩ٨ـ</a></div>
+  <div><a href="/activity">◔</a></div>
+</div>
 
       <div class="login">
         Login
@@ -129,6 +147,11 @@ app.get("/", (req, res) => {
           <p>Build custom ticket systems for your server.</p>
           <div class="learn">Learn More</div>
         </div>
+        
+a{
+  text-decoration:none;
+  color:#4b3a2f;
+}
 
         <div class="card">
           <h3>Verification</h3>

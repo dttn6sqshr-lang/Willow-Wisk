@@ -1,3 +1,13 @@
-export default function Component() {
-  return null;
+export default function PanelEditor() {
+  return (
+    <div>
+      Create Panel
+
+      Edit Panel
+
+      Delete Panel
+
+      Duplicate Panel
+    </div>
+  );
 }

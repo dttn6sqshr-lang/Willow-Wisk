@@ -32,13 +32,16 @@ res.send(`
 body{
   margin:0;
   height:100vh;
-  font-family: Arial;
-  overflow:hidden;
+  font-family:Arial;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   background: linear-gradient(135deg,#F7F2EA,#A8BFA3,#7C9D96);
+  overflow:hidden;
   color:#4b3b2f;
 }
 
-/* soft sparkles */
+/* sparkles */
 body::before{
   content:"";
   position:fixed;
@@ -46,119 +49,109 @@ body::before{
   background-image: radial-gradient(white 1px, transparent 1px);
   background-size: 45px 45px;
   opacity:0.12;
-  animation: floatbg 25s linear infinite;
+  animation: move 25s linear infinite;
 }
 
-@keyframes floatbg{
+@keyframes move{
   from{transform:translateY(0);}
   to{transform:translateY(-300px);}
 }
 
-/* HERO SECTION (RESTORED BIG CUTE STYLE) */
-.hero{
+/* MAIN CARD */
+.card{
+  width:420px;
+  padding:35px;
+  border-radius:28px;
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(18px);
   text-align:center;
-  padding-top:40px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.1);
+  animation: fadeUp 0.6s ease;
 }
 
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(15px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* cupcake */
 .cupcake{
-  font-size:90px;
-  animation: bounce 3.5s ease-in-out infinite;
-  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
-}
-
-@keyframes bounce{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
-}
-
-.title{
-  font-size:54px;
-  margin:0;
-  font-weight:bold;
-  letter-spacing:1px;
-}
-
-.subtitle{
-  opacity:0.75;
-  font-size:16px;
-  margin-top:6px;
-}
-
-/* MAIN LAYOUT (AIRY AGAIN) */
-.wrapper{
-  height:65vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:70px;
-}
-
-/* columns */
-.col{
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-
-/* center bowl (decor only now) */
-.bowl{
-  font-size:95px;
-  animation: float 4s ease-in-out infinite;
-  opacity:0.9;
+  font-size:80px;
+  animation: float 3.5s ease-in-out infinite;
 }
 
 @keyframes float{
   0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
+  50%{transform:translateY(-8px);}
 }
 
-/* BIG CUTE CARDS */
-.card{
-  padding:22px 28px;
-  border-radius:22px;
-  background:rgba(255,255,255,0.28);
-  backdrop-filter:blur(14px);
+/* title */
+.title{
+  font-size:40px;
+  margin:10px 0 5px 0;
+  font-weight:bold;
+}
+
+/* subtitle */
+.subtitle{
+  font-size:14px;
+  opacity:0.75;
+  margin-bottom:20px;
+}
+
+/* bowl accent */
+.bowl{
+  font-size:55px;
+  margin:10px 0 20px 0;
+  opacity:0.9;
+}
+
+/* buttons grid */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+/* buttons */
+.btn{
+  padding:14px;
+  border-radius:16px;
   text-decoration:none;
   color:#4b3b2f;
-  font-size:18px;
-  font-weight:500;
+  background:rgba(255,255,255,0.35);
+  backdrop-filter:blur(10px);
   transition:0.25s;
-  min-width:140px;
-  text-align:center;
+  font-weight:500;
 }
 
-.card:hover{
-  transform:scale(1.08);
+.btn:hover{
+  transform:scale(1.05);
 }
 
-/* emphasize important ones */
-.big{
-  padding:30px 34px;
-  font-size:20px;
-}
+/* accent buttons */
+.status{background:linear-gradient(135deg,#A8BFA3,#7C9D96);}
+.activity{background:linear-gradient(135deg,#8B6F5A,#F7F2EA);}
+.login{background:linear-gradient(135deg,#F7F2EA,#DCE8D7);}
+.discord{background:linear-gradient(135deg,#7C9D96,#A8BFA3);}
 </style>
 </head>
 
 <body>
 
-<div class="hero">
+<div class="card">
+
   <div class="cupcake">🧁</div>
-  <h1 class="title">Willow Wisk</h1>
+  <div class="title">Willow Wisk</div>
   <div class="subtitle">A cozy bakery-style bot dashboard</div>
-</div>
-
-<div class="wrapper">
-
-  <div class="col">
-    <a class="card big" href="/status">Status</a>
-    <a class="card" href="/login">Login</a>
-  </div>
 
   <div class="bowl">🥣</div>
 
-  <div class="col">
-    <a class="card big" href="/activity">Activity</a>
-    <a class="card" href="https://discord.com/oauth2/authorize?client_id=1514467728390623343&permissions=8&scope=bot%20applications.commands">
+  <div class="grid">
+    <a class="btn status" href="/status">Status</a>
+    <a class="btn activity" href="/activity">Activity</a>
+    <a class="btn login" href="/login">Login</a>
+    <a class="btn discord" href="https://discord.com/oauth2/authorize?client_id=1514467728390623343&permissions=8&scope=bot%20applications.commands">
       Add to Discord
     </a>
   </div>

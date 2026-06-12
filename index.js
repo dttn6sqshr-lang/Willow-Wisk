@@ -14,18 +14,34 @@ app.get("/", (req, res) => {
 
   <style>
     body {
-      margin: 0;
-      height: 100vh;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
+  margin: 0;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
 
-      /* bakery gradient */
-      background: linear-gradient(135deg, #F7F2EA, #A8BFA3, #7C9D96);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #5a4638;
-    }
+  background: linear-gradient(135deg, #F7F2EA, #A8BFA3, #7C9D96);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #5a4638;
+}
+
+/* smoother floating background glow */
+.bg-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center,
+    rgba(255,255,255,0.18),
+    transparent 60%);
+  animation: glowShift 10s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes glowShift {
+  0% { transform: scale(1) translateY(0px); opacity: 0.7; }
+  100% { transform: scale(1.1) translateY(-10px); opacity: 1; }
+}
 
     /* soft floating particles */
     .bg-glow {

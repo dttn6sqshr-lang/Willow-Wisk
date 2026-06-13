@@ -9,7 +9,7 @@ const CLIENT_ID = "1514467728390623343";
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 const REDIRECT_URI =
-  "https://willowwisk.apps.bot-hosting.cloud/callback";
+  "https://willowwisk.apps.bot-hosting.cloud/";
   
 const app = express();
 const PORT = process.env.PORT || 25414;

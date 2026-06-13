@@ -15,7 +15,7 @@ client.once("ready", () => {
   console.log(`🧁 Logged in as ${client.user.tag}`);
 });
 
-client.login("YOUR_BOT_TOKEN");
+client.login(process.env.TOKEN);
 
 /* =========================
    LIVE BOT STATS

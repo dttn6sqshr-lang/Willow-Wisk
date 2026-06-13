@@ -1,9 +1,34 @@
 const express = require("express");
-const session = require("express-session");
-const axios = require("axios");
+const { Client, GatewayIntentBits } = require("discord.js");
 
 const app = express();
 const PORT = process.env.PORT || 25414;
+const client = new Client({
+  intents: [GatewayIntentBits.Guilds]
+});
+
+client.login("YOUR_BOT_TOKEN");
+client.once("ready", () => {
+  console.log(`Logged in as ${client.user.tag}`);
+});
+
+function getBotStats() {
+  return {
+    uptime: process.uptime(),
+    ping: client.ws.ping || 0,
+    servers: client.guilds.cache.size,
+    memory: (process.memoryUsage().rss / 1024 / 1024).toFixed(2)
+  };
+}
+
+function getBotStats() {
+  return {
+    uptime: process.uptime(),
+    ping: client.ws.ping || 0,
+    servers: client.guilds.cache.size,
+    memory: (process.memoryUsage().rss / 1024 / 1024).toFixed(2)
+  };
+}
 
 /* =========================
    SESSION
@@ -160,7 +185,10 @@ body::before{
 
 /* STATUS */
 app.get("/status", (req, res) => {
-res.send(`
+
+  const stats = getBotStats();
+
+  res.send(`
 <!DOCTYPE html>
 <html>
 <head>
@@ -176,22 +204,6 @@ body{
   align-items:center;
   background: linear-gradient(135deg,#2f5f5f,#7C9D96,#A8BFA3);
   color:white;
-  overflow:hidden;
-}
-
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background-image: radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1px);
-  background-size: 50px 50px;
-  opacity:0.15;
-  animation: floatbg 25s linear infinite;
-}
-
-@keyframes floatbg{
-  from{transform:translateY(0);}
-  to{transform:translateY(-300px);}
 }
 
 .panel{
@@ -242,25 +254,6 @@ body::before{
   border-radius:16px;
 }
 
-.oven{
-  text-align:center;
-  font-size:70px;
-  margin:10px 0 20px 0;
-  animation: float 3.5s ease-in-out infinite;
-}
-
-@keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
-}
-
-.recipe, .report{
-  margin-top:12px;
-  padding:12px;
-  border-radius:14px;
-  background:rgba(255,255,255,0.1);
-  font-size:13px;
-}
 </style>
 </head>
 
@@ -269,44 +262,34 @@ body::before{
 <div class="panel">
 
   <div class="header">
-    <div class="title">🧁 Willow Wisk Status</div>
+    <div class="title">🧁 Willow Wisk Live Status</div>
     <div class="light"></div>
   </div>
 
-  <div class="oven">🍰</div>
-
   <div class="grid">
-    <div class="card">⌛︎ Uptime: <span id="uptime">0s</span></div>
-    <div class="card">ᯤ Ping: 24ms</div>
-    <div class="card">಄ Status: Online</div>
-    <div class="card">ⓘ Commands Today: 128</div>
-    <div class="card">✉︎ Tickets Today: 14</div>
-    <div class="card">✎𓂃 Logs: Active</div>
-  </div>
 
-  <div class="recipe">
-    🍪 System Recipe:
-    Express + Discord API + OAuth + Sessions
-  </div>
+    <div class="card"> ⌛︎ Uptime: ${Math.floor(stats.uptime)}s</div>
+    <div class="card"> ᯤ Ping: ${stats.ping}ms</div>
 
-  <div class="report">
+    <div class="card"> ಄ Status: Online</div>
+
+    <div class="card"> 𓀡 Users: ${stats.users}</div>
+
+  <div class="card"> ⓘ Commands Today: 128</div>
+    <div class="card"> ✉︎ Tickets Today: 14</div>
+    <div class="card"> ✎𓂃 Logs: Active
+
+<div class="report">
     📅 Daily Bakery Report:
     System running smoothly. No issues detected.
+
   </div>
 
 </div>
 
-<script>
-let s = 0;
-setInterval(() => {
-  s++;
-  document.getElementById("uptime").innerText = s + "s";
-}, 1000);
-</script>
-
 </body>
 </html>
-`);
+  `);
 });
 
 /* ACTIVITY */

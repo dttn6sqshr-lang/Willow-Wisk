@@ -262,19 +262,195 @@ body{
    ACTIVITY PAGE
 ========================= */
 app.get("/activity", (req, res) => {
-  res.send(`
-  <body style="margin:0;height:100vh;display:flex;justify-content:center;align-items:center;
-  font-family:Arial;background:linear-gradient(135deg,#8B6F5A,#F7F2EA,#A8BFA3);">
+res.send(`
+<!DOCTYPE html>
+<html>
+<head>
+<title>Willow Wisk Activity</title>
 
-  <div style="padding:50px;border-radius:20px;background:rgba(255,255,255,0.25);
-  backdrop-filter:blur(12px);text-align:center;">
-    <h1>📊 Activity</h1>
-    <p>Logs coming soon</p>
-    <a href="/">Back</a>
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background: linear-gradient(135deg,#3a2f2a,#7C9D96,#A8BFA3);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+  color:white;
+}
+
+/* floating background flour */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image: radial-gradient(rgba(255,255,255,0.25) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity:0.15;
+  animation: floatbg 30s linear infinite;
+}
+
+@keyframes floatbg{
+  from{transform:translateY(0);}
+  to{transform:translateY(-300px);}
+}
+
+/* MAIN PANEL */
+.panel{
+  width:750px;
+  padding:30px;
+  border-radius:28px;
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(18px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.title{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:#4ade80;
+  box-shadow:0 0 15px #4ade80;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.5);}
+  100%{transform:scale(1);}
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+/* CARDS */
+.card{
+  background:rgba(255,255,255,0.14);
+  padding:14px;
+  border-radius:16px;
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:scale(1.03);
+}
+
+/* LIVE FEED */
+.feed{
+  margin-top:15px;
+  max-height:180px;
+  overflow:hidden;
+}
+
+.log{
+  font-size:13px;
+  margin:6px 0;
+  opacity:0;
+  animation: fadeIn 0.6s forwards;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(6px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* HEAT BAR */
+.heat{
+  height:10px;
+  border-radius:10px;
+  background:linear-gradient(90deg,#4ade80,#facc15,#f87171);
+  margin-top:10px;
+}
+
+/* REPORT BOX */
+.report{
+  margin-top:15px;
+  padding:12px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.1);
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+
+  <div class="header">
+    <div class="title">🧁 Willow Wisk Activity Room</div>
+    <div class="dot"></div>
   </div>
 
-  </body>
-  `);
+  <div class="grid">
+
+    <div class="card"> Joins/Leaves: Active tracking</div>
+    <div class="card"> Activity Heat: High</div>
+
+    <div class="card"> Quiet Periods: 2 today</div>
+    <div class="card"> Severity Level: Medium</div>
+
+  </div>
+
+  <div class="heat"></div>
+
+  <div class="feed" id="feed">
+    <div class="log"> New command baked: /status</div>
+    <div class="log"> User joined server</div>
+    <div class="log"> Reaction role assigned</div>
+  </div>
+
+  <div class="report" id="report">
+    📅 Bakery Report: System is stable, activity rising steadily.
+  </div>
+
+</div>
+
+<script>
+const feed = document.getElementById("feed");
+
+const logs = [
+  " Command baked successfully",
+  " Member joined the bakery",
+  " Reaction role served",
+  " High activity spike detected",
+  " Server heat increasing"
+];
+
+setInterval(() => {
+  const el = document.createElement("div");
+  el.className = "log";
+  el.innerText = logs[Math.floor(Math.random() * logs.length)];
+  feed.prepend(el);
+
+  if(feed.children.length > 6){
+    feed.removeChild(feed.lastChild);
+  }
+}, 2500);
+</script>
+
+</body>
+</html>
+`);
 });
 
 /* =========================

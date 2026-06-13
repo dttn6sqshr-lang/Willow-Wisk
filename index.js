@@ -1,6 +1,16 @@
 const express = require("express");
 const { Client, GatewayIntentBits } = require("discord.js");
 
+const axios = require("axios");
+
+const CLIENT_ID = "1514467728390623343";
+
+// comes from host environment
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+
+const REDIRECT_URI =
+  "https://willowwisk.apps.bot-hosting.cloud/callback";
+  
 const app = express();
 const PORT = process.env.PORT || 25414;
 
@@ -177,13 +187,23 @@ body::before{
   <div class="grid">
     <a class="btn" href="/status">Status</a>
     <a class="btn" href="/activity">Activity</a>
-    <a class="btn" href="/login">Login</a>
+    <button class="btn" onclick="loginDiscord()">Login</button>
     <a class="btn" href="https://discord.com/oauth2/authorize?client_id=1514467728390623343&permissions=8&scope=bot%20applications.commands">
       Add to Discord
     </a>
   </div>
 
 </div>
+
+<script>
+function loginDiscord(){
+  window.open(
+    "/auth/discord",
+    "discordLogin",
+    "width=520,height=720"
+  );
+}
+</script>
 
 </body>
 </html>
@@ -445,8 +465,74 @@ app.get("/login", (req, res) => {
    DISCORD AUTH
 ========================= */
 app.get("/auth/discord", (req, res) => {
-  const url = `https://discord.com/api/oauth2/authorize?client_id=1514467728390623343&redirect_uri=https://willowwisk.apps.bot-hosting.cloud/callback&response_type=code&scope=identify%20guilds`;
-  res.redirect(url);
+  const discordURL =
+    "https://discord.com/api/oauth2/authorize" +
+    "?client_id=" + CLIENT_ID +
+    "&redirect_uri=" + encodeURIComponent(REDIRECT_URI) +
+    "&response_type=code" +
+    "&scope=identify guilds";
+
+  res.redirect(discordURL);
+});
+
+/* CALLBACK */
+app.get("/callback", async (req, res) => {
+  const code = req.query.code;
+
+  if (!code) {
+    return res.send("No code received");
+  }
+
+  res.send(`
+  <html>
+
+  <style>
+  body{
+    margin:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:linear-gradient(135deg,#F8F3E8,#A8BFA3,#7C9D96);
+    font-family:Arial;
+    color:#5B4636;
+  }
+
+  .box{
+    padding:40px;
+    border-radius:24px;
+    background:rgba(255,255,255,0.7);
+    text-align:center;
+  }
+
+  .bowl{
+    font-size:50px;
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+  }
+  </style>
+
+  <body>
+
+  <div class="box">
+    <div class="bowl">🥣</div>
+    <h2>Authentication complete</h2>
+    <p>Preparing your bakery...</p>
+  </div>
+
+  <script>
+  setTimeout(()=>{
+    window.close();
+  },2000)
+  </script>
+
+  </body>
+  </html>
+  `);
 });
 
 /* =========================

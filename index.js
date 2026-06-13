@@ -297,75 +297,124 @@ body{
    ACTIVITY PAGE
 ========================= */
 app.get("/activity", (req, res) => {
-  res.send(`
+res.send(`
 <!DOCTYPE html>
 <html>
 <head>
-<title>Activity</title>
+<title>Willow Wisk Activity</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial;
   background: linear-gradient(135deg,#3a2f2a,#7C9D96,#A8BFA3);
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
   color:white;
 }
 
 .panel{
-  width:700px;
+  width:760px;
   padding:25px;
-  border-radius:20px;
+  border-radius:24px;
   background:rgba(255,255,255,0.12);
   backdrop-filter:blur(16px);
 }
 
-h2{margin:0 0 10px 0;}
+h2{
+  margin-top:0;
+}
+
+.filters{
+  display:flex;
+  gap:8px;
+  margin-bottom:18px;
+  flex-wrap:wrap;
+}
+
+.filter{
+  padding:10px 14px;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  background:#7C9D96;
+  color:white;
+}
+
+.filter.active{
+  transform:scale(1.05);
+}
+
+.logs{
+  max-height:420px;
+  overflow:auto;
+}
 
 .log{
-  padding:10px;
-  margin:8px 0;
-  border-radius:12px;
+  padding:12px;
+  margin-bottom:10px;
+  border-radius:14px;
   background:rgba(255,255,255,0.12);
   font-size:13px;
 }
 </style>
-
 </head>
 
 <body>
 
 <div class="panel">
-  <h2>🧁 Live Activity Feed</h2>
-  <div id="logs"></div>
+
+<h2>🧁 Willow Activity Feed</h2>
+
+<div class="filters">
+  <button class="filter" onclick="loadLogs('all')">📋 All</button>
+  <button class="filter" onclick="loadLogs('command')">🧁 Commands</button>
+  <button class="filter" onclick="loadLogs('join')">👥 Members</button>
+  <button class="filter" onclick="loadLogs('message')">💬 Messages</button>
+  <button class="filter" onclick="loadLogs('system')">⚙️ System</button>
+</div>
+
+<div class="logs" id="logs"></div>
+
 </div>
 
 <script>
-async function loadLogs(){
-  const res = await fetch("/api/activity");
+
+let current = "all";
+
+async function loadLogs(type = current){
+  current = type;
+
+  const res = await fetch("/api/activity?type=" + type);
   const data = await res.json();
 
-  const box = document.getElementById("logs");
-  box.innerHTML = "";
+  const logs = document.getElementById("logs");
+  logs.innerHTML = "";
 
-  data.forEach(l => {
+  if(data.length === 0){
+    logs.innerHTML = "<div class='log'>No activity yet 🧁</div>";
+    return;
+  }
+
+  data.forEach(log => {
     const div = document.createElement("div");
     div.className = "log";
-    div.innerText = "[" + l.time + "] " + l.message;
-    box.appendChild(div);
+    div.innerText = "[" + log.time + "] " + log.message;
+    logs.appendChild(div);
   });
 }
 
-setInterval(loadLogs, 2000);
+setInterval(() => loadLogs(), 2000);
+
 loadLogs();
+
 </script>
 
 </body>
 </html>
-  `);
+`);
 });
 
 /* =========================

@@ -614,7 +614,15 @@ app.get("/callback", async (req, res) => {
   };
 
   res.send(`
-  <html>
+    <html>
+
+    <body>
+      Authentication complete
+    </body>
+
+    </html>
+  `);
+});
 
   <style>
   body{

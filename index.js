@@ -84,6 +84,21 @@ app.get("/", (req, res) => {
 <title>Willow Wisk</title>
 
 <style>
+.auth-loading::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 body{
   margin:0;
   height:100vh;
@@ -195,12 +210,23 @@ body::before{
 </div>
 
 <script>
-function loginDiscord(){
-  window.open(
+function loginDiscord() {
+  const popup = window.open(
     "/auth/discord",
     "discordLogin",
     "width=520,height=720"
   );
+
+  // optional UX improvement: loading state on main page
+  document.body.classList.add("auth-loading");
+
+  const timer = setInterval(() => {
+    if (!popup || popup.closed) {
+      clearInterval(timer);
+      document.body.classList.remove("auth-loading");
+      window.location.reload(); // refresh to show logged-in state later
+    }
+  }, 500);
 }
 </script>
 
@@ -470,6 +496,53 @@ app.get("/auth/discord", (req, res) => {
     "&redirect_uri=" + encodeURIComponent(REDIRECT_URI) +
     "&response_type=code" +
     "&scope=identify guilds";
+    
+    res.send(`
+<html>
+<head>
+<style>
+body {
+  margin:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  background: linear-gradient(135deg,#F8F3E8,#A8BFA3,#7C9D96);
+  font-family:sans-serif;
+  color:#5B4636;
+}
+
+.box {
+  text-align:center;
+}
+
+.bowl {
+  font-size:50px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="bowl">🥣</div>
+    <h2>Opening bakery portal...</h2>
+    <p>Redirecting to Discord</p>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      window.location.href = "${discordURL}";
+    }, 1200);
+  </script>
+</body>
+</html>
+`);
 
   res.redirect(discordURL);
 });

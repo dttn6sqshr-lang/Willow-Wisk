@@ -186,7 +186,7 @@ body::before{
   <div class="grid">
     <a class="btn" href="/status">Status</a>
     <a class="btn" href="/activity">Activity</a>
-    <button onclick="window.open('/auth/discord')">Test Login</button>
+    <button class="btn" onclick="loginDiscord()">Login</button>
     <a class="btn" href="https://discord.com/oauth2/authorize?client_id=1514467728390623343&permissions=8&scope=bot%20applications.commands">
       Add to Discord
     </a>

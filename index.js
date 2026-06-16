@@ -273,14 +273,12 @@ async function loadServers() {
 
 <script>
 function openServer(id) {
-  history.pushState({}, "", `/dashboard/${id}`);
+  history.pushState({}, "", "/dashboard/" + id);
 
   document.body.innerHTML =
-  '<div class="loading">' +
-  '🥣 Opening bakery...' +
-  '</div>';
-
-  // later you load dashboard via fetch()
+    '<div class="loading">' +
+    '🥣 Opening bakery...' +
+    '</div>';
 }
 </script>
 

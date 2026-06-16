@@ -243,18 +243,14 @@ function loginDiscord() {
 function showLoggedInUI(user) {
   const container = document.querySelector(".grid");
 
-  container.innerHTML = `
-    <div class="welcome-card">
-      👤 ${user.username || "Baker"}
-
-      <h2>Welcome back, baker</h2>
-      <p>Choose a server to continue</p>
-    </div>
-
-    <div id="servers"></div>
-  `;
-
-  loadServers();
+  container.innerHTML =
+  '<div class="welcome-card">' +
+    '👤 ' + (user.username || "Baker") +
+    '<h2>Welcome back, baker</h2>' +
+    '<p>Choose a server to continue</p>' +
+  '</div>' +
+  '<div id="servers"></div>';
+loadServers();
 }
 </script>
 
@@ -265,16 +261,13 @@ async function loadServers() {
 
   const container = document.getElementById("servers");
 
-  container.innerHTML = guilds.map(g => `
-    <div class="server-card">
-      <div class="icon">🧁</div>
-      <div class="name">${g.name}</div>
-
-      <button onclick="openServer('${g.id}')">
-        Manage
-      </button>
-    </div>
-  `).join("");
+  container.innerHTML = guilds.map(function(g){
+  return '<div class="server-card">' +
+         '<div class="icon">🧁</div>' +
+         '<div class="name">' + g.name + '</div>' +
+         '<button onclick="openServer(\\'' + g.id + '\\')">Manage</button>' +
+         '</div>';
+}).join("");
 }
 </script>
 
@@ -282,11 +275,10 @@ async function loadServers() {
 function openServer(id) {
   history.pushState({}, "", `/dashboard/${id}`);
 
-  document.body.innerHTML = `
-    <div class="loading">
-      🥣 Opening bakery...
-    </div>
-  `;
+  document.body.innerHTML =
+  '<div class="loading">' +
+  '🥣 Opening bakery...' +
+  '</div>';
 
   // later you load dashboard via fetch()
 }

@@ -466,7 +466,7 @@ app.get("/login", (req, res) => {
 app.get("/auth/discord", (req, res) => {
   const discordURL =
     "https://discord.com/api/oauth2/authorize" +
-    "?client_id=" + 1514467728390623343 +
+    "?client_id=" + CLIENT_ID +
     "&redirect_uri=" + encodeURIComponent(REDIRECT_URI) +
     "&response_type=code" +
     "&scope=identify guilds";

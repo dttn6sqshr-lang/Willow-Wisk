@@ -606,6 +606,12 @@ app.get("/callback", async (req, res) => {
   if (!code) {
     return res.send("No code received");
   }
+  
+   req.session.user = {
+    id: discordUser.id,
+    username: discordUser.username,
+    avatar: discordUser.avatar
+  };
 
   res.send(`
   <html>
@@ -653,12 +659,6 @@ app.get("/callback", async (req, res) => {
     window.close();
   },2000)
   </script>
-  
-  req.session.user = {
-  id: discordUser.id,
-  username: discordUser.username,
-  avatar: discordUser.avatar
-};
 
   </body>
   </html>

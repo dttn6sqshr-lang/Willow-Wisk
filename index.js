@@ -8,8 +8,7 @@ const CLIENT_ID = "1514467728390623343";
 // comes from host environment
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
-const REDIRECT_URI =
-  https://willowwisk.apps.bot-hosting.cloud/callback;
+const REDIRECT_URI = "https://willowwisk.apps.bot-hosting.cloud/callback";
   
 const app = express();
 const PORT = process.env.PORT || 25414;
@@ -467,7 +466,7 @@ app.get("/login", (req, res) => {
 app.get("/auth/discord", (req, res) => {
   const discordURL =
     "https://discord.com/api/oauth2/authorize" +
-    "?client_id=" + CLIENT_ID +
+    "?client_id=" + 1514467728390623343 +
     "&redirect_uri=" + encodeURIComponent(REDIRECT_URI) +
     "&response_type=code" +
     "&scope=identify guilds";

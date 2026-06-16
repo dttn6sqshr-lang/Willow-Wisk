@@ -210,23 +210,85 @@ body::before{
 </div>
 
 <script>
+let loginPopup;
+
 function loginDiscord() {
-  const popup = window.open(
+  loginPopup = window.open(
     "/auth/discord",
     "discordLogin",
     "width=520,height=720"
   );
 
-  // optional UX improvement: loading state on main page
-  document.body.classList.add("auth-loading");
+  // start checking login status
+  const check = setInterval(async () => {
+    try {
+      const res = await fetch("/api/user");
+      const data = await res.json();
 
-  const timer = setInterval(() => {
-    if (!popup || popup.closed) {
-      clearInterval(timer);
-      document.body.classList.remove("auth-loading");
-      window.location.reload(); // refresh to show logged-in state later
+      if (data.loggedIn) {
+        clearInterval(check);
+
+        if (loginPopup) loginPopup.close();
+
+        showLoggedInUI(data.user);
+      }
+    } catch (err) {
+      console.log("checking login...");
     }
-  }, 500);
+  }, 1000);
+}
+</script>
+
+<script>
+function showLoggedInUI(user) {
+  const container = document.querySelector(".grid");
+
+  container.innerHTML = `
+    <div class="welcome-card">
+      👤 ${user.username || "Baker"}
+
+      <h2>Welcome back, baker</h2>
+      <p>Choose a server to continue</p>
+    </div>
+
+    <div id="servers"></div>
+  `;
+
+  loadServers();
+}
+</script>
+
+<script>
+async function loadServers() {
+  const res = await fetch("/api/guilds");
+  const guilds = await res.json();
+
+  const container = document.getElementById("servers");
+
+  container.innerHTML = guilds.map(g => `
+    <div class="server-card">
+      <div class="icon">🧁</div>
+      <div class="name">${g.name}</div>
+
+      <button onclick="openServer('${g.id}')">
+        Manage
+      </button>
+    </div>
+  `).join("");
+}
+</script>
+
+<script>
+function openServer(id) {
+  history.pushState({}, "", `/dashboard/${id}`);
+
+  document.body.innerHTML = `
+    <div class="loading">
+      🥣 Opening bakery...
+    </div>
+  `;
+
+  // later you load dashboard via fetch()
 }
 </script>
 
@@ -601,10 +663,28 @@ app.get("/callback", async (req, res) => {
     window.close();
   },2000)
   </script>
+  
+  req.session.user = {
+  id: discordUser.id,
+  username: discordUser.username,
+  avatar: discordUser.avatar
+};
 
   </body>
   </html>
   `);
+});
+
+/* USER SESSION */
+app.get("/api/user", (req, res) => {
+  if (!req.session || !req.session.user) {
+    return res.json({ loggedIn: false });
+  }
+
+  res.json({
+    loggedIn: true,
+    user: req.session.user
+  });
 });
 
 /* =========================

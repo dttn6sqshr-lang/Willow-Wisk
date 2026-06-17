@@ -147,6 +147,19 @@
     function login() {
       window.open("/auth/discord", "login", "width=500,height=700");
     }
+    
+    async function loadStatus() {
+  const res = await fetch("/api/status");
+  const data = await res.json();
+
+  alert(
+    "Bot Status:\n" +
+    "Ready: " + data.ready + "\n" +
+    "Name: " + data.botName + "\n" +
+    "Servers: " + data.guilds + "\n" +
+    "Ping: " + data.ping + "ms"
+  );
+}
   </script>
 
 </body>

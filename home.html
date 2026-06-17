@@ -17,8 +17,8 @@
 
     /* MAIN CARD */
     .card {
-      width: 620px;
-      height: 420px;
+      width: 720px;
+      height: 520px;
       padding: 30px;
       border-radius: 30px;
       background: rgba(255,255,255,0.25);
@@ -149,44 +149,39 @@
     }
     
     async function loadStatus() {
-  const res = await fetch("/api/status");
-  const data = await res.json();
-
-  showStatusPopup(data);
-}
-
-  alert(
-    "Bot Status:\n" +
-    "Ready: " + data.ready + "\n" +
-    "Name: " + data.botName + "\n" +
-    "Servers: " + data.guilds + "\n" +
-    "Ping: " + data.ping + "ms"
-  );
+  try {
+    const res = await fetch("/api/status");
+    const data = await res.json();
+    showStatusPopup(data);
+  } catch (err) {
+    console.log("Status failed", err);
+    alert("Status not available");
+  }
 }
 
 function showStatusPopup(data) {
-  const popup = document.createElement("div");
+  const overlay = document.createElement("div");
 
-  popup.innerHTML = `
-    <div class="status-overlay" onclick="this.remove()">
-      <div class="status-card" onclick="event.stopPropagation()">
+  overlay.className = "status-overlay";
 
-        <div class="status-title"> 🥐Bot Status</div>
+  overlay.innerHTML = `
+    <div class="status-card">
 
-        <div class="status-item"> Ready: <b>${data.ready}</b></div>
-        <div class="status-item"> Name: <b>${data.botName}</b></div>
-        <div class="status-item"> Servers: <b>${data.guilds}</b></div>
-        <div class="status-item"> Ping: <b>${data.ping}ms</b></div>
+      <div class="status-title">🧁 Bot Status</div>
 
-        <button class="close-btn" onclick="this.parentElement.parentElement.parentElement.remove()">
-          Close
-        </button>
+      <div class="status-item">Ready: <b>${data.ready}</b></div>
+      <div class="status-item">Name: <b>${data.botName}</b></div>
+      <div class="status-item">Servers: <b>${data.guilds}</b></div>
+      <div class="status-item">Ping: <b>${data.ping}ms</b></div>
 
-      </div>
+      <button class="close-btn" onclick="this.closest('.status-overlay').remove()">
+        Close
+      </button>
+
     </div>
   `;
 
-  document.body.appendChild(popup);
+  document.body.appendChild(overlay);
 }
 
 .status-overlay {

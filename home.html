@@ -29,7 +29,7 @@
       position: relative;
     }
 
-    /* TITLE AREA */
+    /* TOP BRAND */
     .title {
       position: absolute;
       top: 15px;
@@ -39,19 +39,25 @@
     }
 
     .cupcake {
-      font-size: 55px;
+      font-size: 50px;
       animation: float 3s ease-in-out infinite;
     }
 
     .name {
       font-size: 22px;
       font-weight: bold;
-      margin-top: 5px;
+      margin-top: 2px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      opacity: 0.7;
+      margin-top: 2px;
     }
 
     @keyframes float {
       0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-8px); }
     }
 
     /* SIDE COLUMNS */
@@ -62,17 +68,19 @@
       width: 140px;
     }
 
-    /* CENTER BOWL */
+    /* CENTER AREA */
     .center {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
+      top: 140px;
     }
 
     .bowl {
-      font-size: 75px;
+      font-size: 50px; /* SMALLER BOWL */
       animation: float 3s ease-in-out infinite;
+      opacity: 0.95;
     }
 
     /* BUTTONS */
@@ -99,10 +107,11 @@
 
   <div class="card">
 
-    <!-- TITLE -->
+    <!-- BRAND -->
     <div class="title">
       <div class="cupcake">🧁</div>
       <div class="name">Willow Wisk</div>
+      <div class="subtitle">Willow & Wisk Café</div>
     </div>
 
     <!-- LEFT -->
@@ -111,7 +120,7 @@
       <button class="btn">Activity</button>
     </div>
 
-    <!-- CENTER -->
+    <!-- CENTER BOWL (SMALLER + UNDER TITLE) -->
     <div class="center">
       <div class="bowl">🥣</div>
     </div>

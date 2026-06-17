@@ -6,26 +6,19 @@
 <style>
 /* PAGE */
 
-body{
-  margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family:Arial;
-  overflow:hidden;
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  /* bakery wall */
+  font-family: Arial;
+  color: #4b3b2f;
+
+  /* wood wall texture */
   background:
-  linear-gradient(
-    to bottom,
-    #F7F0E6 0%,
-    #F7F0E6 68%,
-    #D8B89B 68%,
-    #D8B89B 100%
-  );
-
-  color:#5B4332;
+    linear-gradient(90deg, #7a5538 0%, #8a6242 25%, #6f4c32 50%, #8a6242 75%, #7a5538 100%);
 }
 
 /* flour particles */
@@ -49,21 +42,22 @@ body::before{
 
 /* MAIN CARD */
 
-.card{
-  width:760px;
-  padding:35px;
-  border-radius:24px;
+.card {
+  width: 760px;
+  height: 460px;
 
-  background:#FFF8EF;
+  background: #fff8ef;
 
-  border-top:8px solid #9B7E67;
-  border-bottom:8px solid #9B7E67;
+  border-radius: 18px;
 
-  box-shadow:0 18px 40px rgba(0,0,0,.08);
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.35);
 
-  text-align:center;
-  position:relative;
-  z-index:2;
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* cupcake */
@@ -81,26 +75,19 @@ body::before{
 
 /* hanging sign */
 
-.sign{
-  display:inline-block;
-  background:#FFFDF9;
-  border:3px solid #C7A98D;
-  border-radius:14px;
-  padding:12px 28px;
-  margin-bottom:14px;
-
-  box-shadow:0 5px 12px rgba(0,0,0,.06);
+.sign {
+  text-align: center;
+  margin-bottom: 10px;
 }
 
-.title{
-  font-size:26px;
-  font-weight:bold;
+.title {
+  font-size: 26px;
+  font-weight: bold;
 }
 
-.subtitle{
-  font-size:12px;
-  opacity:.7;
-  margin-top:3px;
+.subtitle {
+  font-size: 12px;
+  opacity: 0.7;
 }
 
 /* settings */
@@ -113,11 +100,39 @@ body::before{
 
 /* shelf */
 
-.shelf{
-  background:#FAF3EA;
-  border:2px solid #D9B79B;
-  border-radius:18px;
-  padding:25px;
+.shelf {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 28px;
+  background: #4e3423;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.4);
+}
+
+.top-shelf {
+  top: 70px;
+}
+
+.bottom-shelf {
+  bottom: 70px;
+}
+
+.frame {
+  width: 820px;
+  height: 520px;
+
+  padding: 30px;
+
+  background: #2f1e14;
+  border-radius: 26px;
+
+  box-shadow:
+    inset 0 0 0 6px #5a3a26,
+    inset 0 0 40px rgba(0,0,0,0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* shelf title */
@@ -191,38 +206,28 @@ body::before{
 
   <div class="settings">📖 Settings</div>
 
-  <div class="shelf">
+  <div class="shelf top-shelf"></div>
 
-    <div class="shelf-title">
-      Today’s Specials
+<div class="frame">
+  <div class="card">
+
+    <div class="sign">
+      <div class="title">Willow Wisk</div>
+      <div class="subtitle">Willow & Wisk Café</div>
     </div>
 
     <div class="grid">
-
-      <button class="btn" onclick="loadStatus()">
-        Status
-      </button>
-
-      <button class="btn" onclick="loginDiscord()">
-        Login
-      </button>
-
+      <button>Status</button>
+      <button>Login</button>
       <div class="bowl">🥣</div>
-
-      <button class="btn">
-        Activity
-      </button>
-
-      <button class="btn">
-        Add Discord
-      </button>
-
+      <button>Activity</button>
+      <button>Add Discord</button>
     </div>
 
   </div>
+</div>
 
-  <div class="footer">
-    fresh from the kitchen ✨
+<div class="shelf bottom-shelf"></div>
   </div>
 
 </div>

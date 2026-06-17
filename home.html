@@ -15,57 +15,84 @@
       color: #4b3b2f;
     }
 
+    .wrapper {
+      text-align: center;
+    }
+
+    /* HEADER */
+    .header {
+      margin-bottom: 15px;
+    }
+
+    .cupcake {
+      font-size: 52px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 2px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* CARD */
     .card {
-      width: 650px;
-      height: 420px;
+      width: 620px;
+      height: 380px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 40px;
+      padding: 30px;
       border-radius: 30px;
       background: rgba(255,255,255,0.25);
       backdrop-filter: blur(15px);
       box-shadow: 0 20px 50px rgba(0,0,0,0.12);
     }
 
-    /* LEFT + RIGHT COLUMNS */
+    /* COLUMNS (LESS SPACING FIX) */
     .col {
       display: flex;
       flex-direction: column;
-      gap: 15px;
-      width: 150px;
+      gap: 10px; /* tighter spacing */
+      width: 140px;
     }
 
     /* CENTER */
     .center {
-      text-align: center;
       flex: 1;
+      text-align: center;
     }
 
     .bowl {
-      font-size: 60px;
+      font-size: 55px;
       animation: float 3s ease-in-out infinite;
     }
 
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    /* BUTTONS */
+    /* BUTTONS (smaller + tighter feel) */
     .btn {
-      padding: 14px;
-      border-radius: 16px;
+      padding: 12px;
+      border-radius: 14px;
       border: none;
       background: #7C9D96;
       color: white;
       cursor: pointer;
       transition: 0.2s;
-      font-size: 13px;
+      font-size: 12px;
     }
 
     .btn:hover {
-      transform: scale(1.05);
+      transform: scale(1.04);
       background: #6f8f89;
     }
 
@@ -74,23 +101,35 @@
 
 <body>
 
-  <div class="card">
+  <div class="wrapper">
 
-    <!-- LEFT COLUMN -->
-    <div class="col">
-      <button class="btn">Status</button>
-      <button class="btn">Activity</button>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="cupcake">🧁</div>
+      <div class="title">Willow Wisk</div>
+      <div class="subtitle">Willow & Wisk Café</div>
     </div>
 
-    <!-- CENTER BOWL -->
-    <div class="center">
-      <div class="bowl">🥣</div>
-    </div>
+    <!-- CARD -->
+    <div class="card">
 
-    <!-- RIGHT COLUMN -->
-    <div class="col">
-      <button class="btn">Login</button>
-      <button class="btn">Add to Discord</button>
+      <!-- LEFT -->
+      <div class="col">
+        <button class="btn">Status</button>
+        <button class="btn">Activity</button>
+      </div>
+
+      <!-- CENTER -->
+      <div class="center">
+        <div class="bowl">🥣</div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="col">
+        <button class="btn">Login</button>
+        <button class="btn">Add Discord</button>
+      </div>
+
     </div>
 
   </div>

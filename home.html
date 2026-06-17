@@ -16,32 +16,37 @@
     }
 
     .card {
-      width: 520px;
-      padding: 50px;
+      width: 650px;
+      height: 420px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px;
       border-radius: 30px;
       background: rgba(255,255,255,0.25);
       backdrop-filter: blur(15px);
-      text-align: center;
       box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+      position: relative;
     }
 
-    .title {
-      font-size: 38px;
-      font-weight: bold;
-      margin-bottom: 25px;
-    }
-
-    /* TOP ROW */
-    .top-row {
+    /* LEFT SIDE */
+    .side {
       display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
+      flex-direction: column;
+      gap: 15px;
+      width: 140px;
     }
 
-    /* BOWL */
+    /* CENTER BOWL */
+    .center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
     .bowl {
-      font-size: 70px;
-      margin: 25px 0;
+      font-size: 75px;
       animation: float 3s ease-in-out infinite;
     }
 
@@ -50,16 +55,7 @@
       50% { transform: translateY(-10px); }
     }
 
-    /* BOTTOM ROW */
-    .bottom-row {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-
     .btn {
-      flex: 1;
-      margin: 5px;
       padding: 14px;
       border-radius: 16px;
       border: none;
@@ -67,11 +63,21 @@
       color: white;
       cursor: pointer;
       transition: 0.2s;
+      font-size: 13px;
     }
 
     .btn:hover {
       transform: scale(1.05);
       background: #6f8f89;
+    }
+
+    .title {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: bold;
+      font-size: 22px;
     }
 
   </style>
@@ -83,18 +89,20 @@
 
     <div class="title">🧁 Willow Wisk</div>
 
-    <!-- TOP: Status + Login -->
-    <div class="top-row">
+    <!-- LEFT -->
+    <div class="side">
       <button class="btn">Status</button>
-      <button class="btn">Login</button>
+      <button class="btn">Activity</button>
     </div>
 
-    <!-- MIDDLE BOWL -->
-    <div class="bowl">🥣</div>
+    <!-- CENTER BOWL -->
+    <div class="center">
+      <div class="bowl">🥣</div>
+    </div>
 
-    <!-- BOTTOM: Activity + Add -->
-    <div class="bottom-row">
-      <button class="btn">Activity</button>
+    <!-- RIGHT -->
+    <div class="side">
+      <button class="btn">Login</button>
       <button class="btn">Add to Discord</button>
     </div>
 

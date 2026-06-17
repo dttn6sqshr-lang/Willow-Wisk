@@ -1,1 +1,105 @@
-{}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Willow Wisk</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial;
+      background: linear-gradient(135deg,#F7F2EA,#A8BFA3,#7C9D96);
+      color: #4b3b2f;
+      overflow: hidden;
+    }
+
+    .card {
+      width: 520px;
+      padding: 50px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(15px);
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    }
+
+    .cupcake {
+      font-size: 85px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .title {
+      font-size: 42px;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      opacity: 0.75;
+      margin-bottom: 20px;
+    }
+
+    .bowl {
+      font-size: 60px;
+      margin: 20px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 14px;
+      border-radius: 16px;
+      border: none;
+      background: #7C9D96;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: #6f8f89;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <!-- TOP CUPCAKE -->
+    <div class="cupcake">🧁</div>
+
+    <div class="title">Willow Wisk</div>
+    <div class="subtitle">A cozy bakery-style bot dashboard</div>
+
+    <!-- CENTER BOWL -->
+    <div class="bowl">🥣</div>
+
+    <!-- BUTTONS -->
+    <div class="grid">
+      <button class="btn">Status</button>
+      <button class="btn">Activity</button>
+      <button class="btn">Login</button>
+      <button class="btn">Add to Discord</button>
+    </div>
+
+  </div>
+
+</body>
+</html>

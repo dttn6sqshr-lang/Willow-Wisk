@@ -14,11 +14,13 @@ body {
   align-items: center;
 
   font-family: Arial;
-  color: #4b3b2f;
 
-  /* wood wall texture */
-  background:
-    linear-gradient(90deg, #7a5538 0%, #8a6242 25%, #6f4c32 50%, #8a6242 75%, #7a5538 100%);
+  background: linear-gradient(
+    135deg,
+    #f8f1e7,
+    #f2e3d5,
+    #e8d2bd
+  );
 }
 
 /* flour particles */
@@ -41,23 +43,24 @@ body::before{
 }
 
 /* MAIN CARD */
-
 .card {
-  width: 760px;
-  height: 460px;
+  width: 740px;
+  height: 480px;
 
-  background: #fff8ef;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(14px);
 
-  border-radius: 18px;
+  border-radius: 26px;
 
-  box-shadow:
-    0 10px 25px rgba(0,0,0,0.35);
-
-  padding: 25px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.12);
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  padding: 28px;
+
+  text-align: center;
 }
 
 /* cupcake */
@@ -144,33 +147,37 @@ body::before{
 }
 
 /* layout */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: center;
+}
 
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-  align-items:center;
+.bowl {
+  grid-column: span 2;
+  font-size: 52px;
+  margin: 6px 0;
 }
 
 /* recipe cards */
+.btn {
+  background: #fffdf8;
+  border: 1px solid #e6d2bc;
 
-.btn{
-  padding:16px;
-  background:#FFFDF8;
-  border:2px dashed #C9B39A;
-  border-radius:14px;
+  padding: 16px;
+  border-radius: 16px;
 
-  color:#5B4332;
-  cursor:pointer;
+  font-size: 14px;
 
-  font-size:14px;
+  cursor: pointer;
 
-  transition:.25s;
+  transition: 0.25s;
 }
 
-.btn:hover{
-  transform:translateY(-4px);
-  box-shadow:0 8px 18px rgba(0,0,0,.08);
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
 }
 
 /* bowl */
@@ -217,12 +224,14 @@ body::before{
     </div>
 
     <div class="grid">
-      <button>Status</button>
-      <button>Login</button>
-      <div class="bowl">🥣</div>
-      <button>Activity</button>
-      <button>Add Discord</button>
-    </div>
+  <button class="btn">Status</button>
+  <button class="btn">Login</button>
+
+  <div class="bowl">🥣</div>
+
+  <button class="btn">Activity</button>
+  <button class="btn">Add Discord</button>
+</div>
 
   </div>
 </div>

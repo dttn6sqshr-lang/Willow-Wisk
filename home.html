@@ -17,7 +17,7 @@
 
     .card {
       width: 650px;
-      height: 420px;
+      height: 480px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -29,7 +29,32 @@
       position: relative;
     }
 
-    /* LEFT SIDE */
+    /* TITLE AREA */
+    .title {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    .cupcake {
+      font-size: 55px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .name {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* SIDE COLUMNS */
     .side {
       display: flex;
       flex-direction: column;
@@ -50,11 +75,7 @@
       animation: float 3s ease-in-out infinite;
     }
 
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
+    /* BUTTONS */
     .btn {
       padding: 14px;
       border-radius: 16px;
@@ -71,15 +92,6 @@
       background: #6f8f89;
     }
 
-    .title {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-weight: bold;
-      font-size: 22px;
-    }
-
   </style>
 </head>
 
@@ -87,7 +99,11 @@
 
   <div class="card">
 
-    <div class="title">🧁 Willow Wisk</div>
+    <!-- TITLE -->
+    <div class="title">
+      <div class="cupcake">🧁</div>
+      <div class="name">Willow Wisk</div>
+    </div>
 
     <!-- LEFT -->
     <div class="side">
@@ -95,7 +111,7 @@
       <button class="btn">Activity</button>
     </div>
 
-    <!-- CENTER BOWL -->
+    <!-- CENTER -->
     <div class="center">
       <div class="bowl">🥣</div>
     </div>

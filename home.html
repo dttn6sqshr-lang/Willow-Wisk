@@ -13,7 +13,6 @@
       font-family: Arial;
       background: linear-gradient(135deg,#F7F2EA,#A8BFA3,#7C9D96);
       color: #4b3b2f;
-      overflow: hidden;
     }
 
     .card {
@@ -26,8 +25,23 @@
       box-shadow: 0 20px 50px rgba(0,0,0,0.12);
     }
 
-    .cupcake {
-      font-size: 85px;
+    .title {
+      font-size: 38px;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    /* TOP ROW */
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    /* BOWL */
+    .bowl {
+      font-size: 70px;
+      margin: 25px 0;
       animation: float 3s ease-in-out infinite;
     }
 
@@ -36,31 +50,16 @@
       50% { transform: translateY(-10px); }
     }
 
-    .title {
-      font-size: 42px;
-      margin: 10px 0;
-      font-weight: bold;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      opacity: 0.75;
-      margin-bottom: 20px;
-    }
-
-    .bowl {
-      font-size: 60px;
-      margin: 20px 0;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+    /* BOTTOM ROW */
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
       margin-top: 20px;
     }
 
     .btn {
+      flex: 1;
+      margin: 5px;
       padding: 14px;
       border-radius: 16px;
       border: none;
@@ -68,13 +67,13 @@
       color: white;
       cursor: pointer;
       transition: 0.2s;
-      font-size: 14px;
     }
 
     .btn:hover {
       transform: scale(1.05);
       background: #6f8f89;
     }
+
   </style>
 </head>
 
@@ -82,20 +81,20 @@
 
   <div class="card">
 
-    <!-- TOP CUPCAKE -->
-    <div class="cupcake">🧁</div>
+    <div class="title">🧁 Willow Wisk</div>
 
-    <div class="title">Willow Wisk</div>
-    <div class="subtitle">A cozy bakery-style bot dashboard</div>
+    <!-- TOP: Status + Login -->
+    <div class="top-row">
+      <button class="btn">Status</button>
+      <button class="btn">Login</button>
+    </div>
 
-    <!-- CENTER BOWL -->
+    <!-- MIDDLE BOWL -->
     <div class="bowl">🥣</div>
 
-    <!-- BUTTONS -->
-    <div class="grid">
-      <button class="btn">Status</button>
+    <!-- BOTTOM: Activity + Add -->
+    <div class="bottom-row">
       <button class="btn">Activity</button>
-      <button class="btn">Login</button>
       <button class="btn">Add to Discord</button>
     </div>
 

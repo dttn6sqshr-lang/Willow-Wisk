@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Willow Wisk</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial;
+      background: linear-gradient(135deg,#F7F2EA,#A8BFA3,#7C9D96);
+      color: #4b3b2f;
+    }
+
+    /* MAIN CARD */
+    .card {
+      width: 620px;
+      height: 420px;
+      padding: 30px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    /* HEADER */
+    .cupcake {
+      font-size: 52px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 2px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+
+    /* MIDDLE LAYOUT */
+    .middle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+      margin: 10px 0;
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 140px;
+    }
+
+    .center {
+      flex: 1;
+      text-align: center;
+    }
+
+    .bowl {
+      font-size: 55px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* BUTTONS */
+    .btn {
+      padding: 12px;
+      border-radius: 14px;
+      border: none;
+      background: #7C9D96;
+      color: white;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* B (hover bakery feel) */
+    .btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      background: #6f8f89;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    /* FLOAT ANIMATION */
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <!-- HEADER -->
+    <div>
+      <div class="cupcake">🧁</div>
+      <div class="title">Willow Wisk</div>
+      <div class="subtitle">Willow & Wisk Café</div>
+    </div>
+
+    <!-- MIDDLE -->
+    <div class="middle">
+
+      <!-- LEFT -->
+      <div class="col">
+        <button class="btn" onclick="location.href='/status'">Status</button>
+        <button class="btn" onclick="location.href='/activity'">Activity</button>
+      </div>
+
+      <!-- CENTER -->
+      <div class="center">
+        <div class="bowl">🥣</div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="col">
+        <button class="btn" onclick="login()">Login</button>
+        <button class="btn">Add Discord</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function login() {
+      window.open("/auth/discord", "login", "width=500,height=700");
+    }
+  </script>
+
+</body>
+</html>

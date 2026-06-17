@@ -2,46 +2,45 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 25414;
+const PORT = process.env.PORT || 3000;
 
 /* -----------------------------
-   Basic setup
+   Middleware
 ------------------------------*/
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /* -----------------------------
-   Serve static files
+   STATIC FILES (IMPORTANT FIX)
 ------------------------------*/
 app.use(express.static(__dirname));
 
+/* -----------------------------
+   HOME PAGE (FORCED HTML)
+------------------------------*/
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "home.html"));
 });
 
 /* -----------------------------
-   STATUS PAGE (placeholder)
+   TEST ROUTE (DEBUG)
+------------------------------*/
+app.get("/test", (req, res) => {
+  res.send("OK Willow Wisk is running 🧁");
+});
+
+/* -----------------------------
+   STATUS
 ------------------------------*/
 app.get("/status", (req, res) => {
-  res.send("Status page coming soon 🧁");
+  res.send("Status page coming soon 🥣");
 });
 
 /* -----------------------------
-   ACTIVITY PAGE (placeholder)
+   ACTIVITY
 ------------------------------*/
 app.get("/activity", (req, res) => {
-  res.send("Activity page coming soon 🥣");
-});
-
-/* -----------------------------
-   AUTH PLACEHOLDERS (safe)
-------------------------------*/
-app.get("/auth/discord", (req, res) => {
-  res.send("OAuth step coming next");
-});
-
-app.get("/callback", (req, res) => {
-  res.send("Callback step coming next");
+  res.send("Activity page coming soon 🎀");
 });
 
 /* -----------------------------

@@ -24,7 +24,7 @@ app.use(express.static("public"));
 
 const CLIENT_ID = "1514467728390623343";
 const CLIENT_SECRET = "wkn52DREW39kMHACbCRFPmnH1FZzh6Db";
-const REDIRECT_URI = "https://YOUR_DOMAIN/callback";
+const REDIRECT_URI = "https://willowwisk.apps.bot-hosting.cloud/callback";
 
 /* ======================
    ROUTES

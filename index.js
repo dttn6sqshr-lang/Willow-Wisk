@@ -1,80 +1,85 @@
 const express = require("express");
 const path = require("path");
+const { Client, GatewayIntentBits } = require("discord.js");
 
 const app = express();
 const PORT = process.env.PORT || 25414;
 
-const startTime = Date.now();
-
-/* -----------------------------
-   BOT CLIENT (discord.js)
-------------------------------*/
-const { Client, GatewayIntentBits } = require("discord.js");
+/* =========================
+   DISCORD BOT (v14)
+========================= */
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds]
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
+  ],
 });
 
-client.login(process.env.TOKEN);
+const startTime = Date.now();
 
-/* -----------------------------
-   BASIC SERVER
-------------------------------*/
-app.use(express.json());
+client.once("ready", () => {
+  console.log(`Logged in as ${client.user.tag}`);
+});
 
-app.use(express.static(__dirname));
+/* =========================
+   EXPRESS SETUP
+========================= */
 
-/* -----------------------------
-   HOME
-------------------------------*/
+app.use(express.static("public"));
+
+/* =========================
+   HOME PAGE
+========================= */
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "home.html"));
 });
 
-/* -----------------------------
+/* =========================
    STATUS API (REAL DATA)
-------------------------------*/
+========================= */
+
 app.get("/api/status", (req, res) => {
   const uptimeMs = Date.now() - startTime;
 
   const hours = Math.floor(uptimeMs / 3600000);
   const days = Math.floor(hours / 24);
 
+  const totalUsers = client.guilds.cache.reduce(
+    (acc, g) => acc + (g.memberCount || 0),
+    0
+  );
+
   res.json({
     online: client.isReady(),
-
     ping: client.ws.ping || 0,
-
     servers: client.guilds.cache.size || 0,
-
-    users: client.guilds.cache.reduce(
-      (acc, guild) => acc + guild.memberCount,
-      0
-    ),
-
-    container: "Running",
-
-    uptime: days + "d " + (hours % 24) + "h"
+    users: totalUsers || 0,
+    uptime: `${days}d ${hours % 24}h`
   });
 });
 
-/* -----------------------------
-   STATUS PAGE
-------------------------------*/
-app.get("/status", (req, res) => {
-  res.sendFile(path.join(__dirname, "home.html"));
+/* =========================
+   LOGIN PLACEHOLDER (PHASE 3 READY)
+========================= */
+
+app.get("/auth/discord", (req, res) => {
+  // placeholder for now
+  res.send("Discord OAuth will be added in Phase 3 🧁");
 });
 
-/* -----------------------------
-   ACTIVITY PAGE
-------------------------------*/
-app.get("/activity", (req, res) => {
-  res.send("Activity coming next 🥣");
-});
+/* =========================
+   START SERVER
+========================= */
 
-/* -----------------------------
-   START
-------------------------------*/
 app.listen(PORT, () => {
-  console.log("Willow Wisk running on port " + PORT);
+  console.log(`Website running on port ${PORT}`);
 });
+
+/* =========================
+   BOT LOGIN
+========================= */
+
+client.login(process.env.TOKEN);

@@ -195,20 +195,32 @@ body::before{
   margin:18px 0;
 }
 
-.steam{
-  font-size:18px;
-  opacity:.65;
-  animation: steam 2.5s ease-in-out infinite;
+.bowl{
+  font-size:52px;
 }
 
-@keyframes steam{
-  0%{transform:translateY(0);opacity:.3;}
-  50%{transform:translateY(-6px);opacity:.9;}
-  100%{transform:translateY(0);opacity:.3;}
+.bowl-circle{
+  width:90px;
+  height:90px;
+
+  margin:auto;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  border-radius:50%;
+
+  background: rgba(255,255,255,0.55);
+
+  border: 2px solid #E8D8C6;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.05);
 }
 
 .bowl{
-  font-size:52px;
+  font-size:42px;
 }
 
 /* ===== ABOUT ===== */
@@ -340,9 +352,12 @@ document.addEventListener("keydown", (e) => {
   </div>
 
   <div class="centerpiece">
-    <div class="steam">♨️</div>
+
+  <div class="bowl-circle">
     <div class="bowl">🥣</div>
   </div>
+
+</div>
 
   <div class="row">
     <button class="btn">Login</button>

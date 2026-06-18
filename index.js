@@ -4,6 +4,8 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 25414;
 
+const startTime = Date.now();
+
 /* -----------------------------
    BOT CLIENT (discord.js)
 ------------------------------*/
@@ -33,11 +35,26 @@ app.get("/", (req, res) => {
    STATUS API (REAL DATA)
 ------------------------------*/
 app.get("/api/status", (req, res) => {
+  const uptimeMs = Date.now() - startTime;
+
+  const hours = Math.floor(uptimeMs / 3600000);
+  const days = Math.floor(hours / 24);
+
   res.json({
-    ready: client.isReady(),
-    botName: client.user ? client.user.username : "Loading...",
-    guilds: client.guilds.cache.size,
-    ping: client.ws.ping
+    online: client.isReady(),
+
+    ping: client.ws.ping || 0,
+
+    servers: client.guilds.cache.size || 0,
+
+    users: client.guilds.cache.reduce(
+      (acc, guild) => acc + guild.memberCount,
+      0
+    ),
+
+    container: "Running",
+
+    uptime: days + "d " + (hours % 24) + "h"
   });
 });
 

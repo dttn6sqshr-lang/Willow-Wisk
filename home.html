@@ -322,6 +322,29 @@ body::before{
       • System update deployed
       
       <script>
+      
+      <script>
+
+async function loadStatus() {
+  const res = await fetch("/api/status");
+  const data = await res.json();
+
+  document.getElementById("statusContent").innerHTML =
+    "Bot Online: " + (data.online ? "🟢" : "🔴") + "<br><br>" +
+
+    "Discord Ping: " + data.ping + "ms<br>" +
+
+    "Servers: " + data.servers + "<br>" +
+
+    "Users: " + data.users + "<br><br>" +
+
+    "Container: " + data.container + "<br>" +
+
+    "Uptime: " + data.uptime;
+}
+
+</script>
+
 function openWindow(type) {
   const overlay = document.getElementById("overlay");
   const status = document.getElementById("statusWindow");
@@ -333,8 +356,9 @@ function openWindow(type) {
   activity.style.display = "none";
 
   if (type === "status") {
-    status.style.display = "block";
-  }
+  status.style.display = "block";
+  loadStatus();
+}
 
   if (type === "activity") {
     activity.style.display = "block";

@@ -16,7 +16,7 @@ body{
   background: linear-gradient(135deg,#FAF4EC,#F2E5D7,#E8D2BD);
 }
 
-/* flour particles */
+/* soft flour background */
 body::before{
   content:"";
   position:fixed;
@@ -34,7 +34,7 @@ body::before{
 
 /* MAIN CARD */
 .card{
-  width:780px;
+  width:760px;
   padding:38px;
 
   background: rgba(255,249,242,.82);
@@ -60,7 +60,7 @@ body::before{
   50%{transform:translateY(-4px);}
 }
 
-/* TITLE */
+/* TEXT */
 .title{
   font-size:32px;
   font-weight:bold;
@@ -70,10 +70,10 @@ body::before{
 .subtitle{
   font-size:14px;
   color:#7A6554;
-  margin-bottom:25px;
+  margin-bottom:22px;
 }
 
-/* BUTTONS */
+/* BUTTON ROWS */
 .row{
   display:flex;
   justify-content:center;
@@ -100,7 +100,7 @@ body::before{
   box-shadow:0 14px 25px rgba(0,0,0,.08);
 }
 
-/* BOWL */
+/* BOWL (CENTERPIECE ONLY) */
 .bowl-circle{
   width:90px;
   height:90px;
@@ -152,7 +152,7 @@ body::before{
   z-index:100;
 }
 
-/* WINDOW */
+/* WINDOWS */
 .window{
   width:340px;
   background: rgba(255,249,242,.95);
@@ -188,7 +188,6 @@ body::before{
   line-height:1.6;
 }
 
-/* DOT */
 .dot{
   width:10px;
   height:10px;
@@ -200,26 +199,32 @@ body::before{
 
 <body>
 
+<!-- MAIN HOMEPAGE -->
 <div class="card">
 
   <div class="cupcake">🧁</div>
+
   <div class="title">Willow Wisk</div>
   <div class="subtitle">Willow & Wisk Café</div>
 
+  <!-- STATUS / ACTIVITY -->
   <div class="row">
     <button class="btn" onclick="openWindow('status')">Status</button>
     <button class="btn" onclick="openWindow('activity')">Activity</button>
   </div>
 
+  <!-- CENTER BOWL -->
   <div class="bowl-circle">
     <div class="bowl">🥣</div>
   </div>
 
+  <!-- LOGIN -->
   <div class="row">
     <button class="btn" onclick="openLogin()">Login</button>
     <button class="btn">Add Discord</button>
   </div>
 
+  <!-- ABOUT -->
   <div class="about">
     Willow Wisk is a bakery-themed Discord bot built for tickets,
     partnerships, automation, moderation, and server management.
@@ -229,7 +234,7 @@ body::before{
 
 </div>
 
-<!-- STATUS / ACTIVITY WINDOWS -->
+<!-- POPUPS -->
 <div id="overlay" class="overlay" onclick="closeWindow(event)">
 
   <div id="statusWindow" class="window" style="display:none;">
@@ -273,26 +278,32 @@ function openWindow(type){
   }
 }
 
+/* REAL STATUS */
+async function loadStatus(){
+  try {
+    const res = await fetch("/api/status");
+    const data = await res.json();
+
+    document.getElementById("statusContent").innerHTML =
+      "Online: " + (data.online ? "🟢" : "🔴") + "<br><br>" +
+      "Ping: " + data.ping + "ms<br>" +
+      "Servers: " + data.servers + "<br>" +
+      "Users: " + data.users + "<br><br>" +
+      "Uptime: " + data.uptime;
+  } catch (e) {
+    document.getElementById("statusContent").innerHTML =
+      "Status unavailable";
+  }
+}
+
+/* CLOSE */
 function closeWindow(e){
   if(e.target.id==="overlay"){
     document.getElementById("overlay").style.display="none";
   }
 }
 
-/* REAL STATUS FETCH */
-async function loadStatus(){
-  const res = await fetch("/api/status");
-  const data = await res.json();
-
-  document.getElementById("statusContent").innerHTML =
-    "Online: " + (data.online ? "🟢" : "🔴") + "<br><br>" +
-    "Ping: " + data.ping + "ms<br>" +
-    "Servers: " + data.servers + "<br>" +
-    "Users: " + data.users + "<br><br>" +
-    "Uptime: " + data.uptime;
-}
-
-/* LOGIN PLACEHOLDER (PHASE 3 READY) */
+/* LOGIN PLACEHOLDER */
 function openLogin(){
   alert("Preparing bakery access… (OAuth coming in Phase 3)");
 }

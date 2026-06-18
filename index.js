@@ -104,9 +104,9 @@ app.get("/api/activity", (req, res) => {
    DISCORD OAUTH
 ========================= */
 
-const CLIENT_ID = "YOUR_CLIENT_ID";
-const CLIENT_SECRET = "YOUR_CLIENT_SECRET";
-const REDIRECT_URI = "http://localhost:25414/callback";
+const CLIENT_ID = "1514467728390623343";
+const CLIENT_SECRET = "wkn52DREW39kMHACbCRFPmnH1FZzh6Db";
+const REDIRECT_URI = "https://willowwisk.apps.bot-hosting.cloud/callback";
 
 app.get("/auth/discord", (req, res) => {
   const url = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify`;

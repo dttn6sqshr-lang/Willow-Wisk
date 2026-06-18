@@ -4,153 +4,235 @@
 <title>Willow Wisk</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* ===== PAGE ===== */
+
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial, sans-serif;
+  overflow:hidden;
 
   background: linear-gradient(
     135deg,
-    #F7F0E6,
-    #F0E1D2,
-    #EAD7C3
+    #FAF4EC,
+    #F2E5D7,
+    #E8D2BD
   );
 }
 
-/* TOP BAR */
+/* flour particles */
 
-.topbar {
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
 
-  padding: 0 20px;
+  background-image:
+    radial-gradient(white 1px, transparent 1px);
 
-  background: rgba(255,255,255,0.6);
+  background-size:40px 40px;
+  opacity:.10;
+  animation: drift 28s linear infinite;
+}
+
+@keyframes drift{
+  from{transform:translateY(0);}
+  to{transform:translateY(-300px);}
+}
+
+/* ===== MAIN CARD ===== */
+
+.card{
+  width:760px;
+  padding:38px;
+
+  background: rgba(255,249,242,.82);
   backdrop-filter: blur(10px);
 
-  color: #4B3B2F;
-  font-weight: bold;
+  border:1px solid rgba(255,255,255,.45);
+
+  border-radius:24px;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.08);
+
+  text-align:center;
+  position:relative;
+  z-index:2;
 }
 
-.topbar .nav {
-  display: flex;
-  gap: 14px;
-  font-weight: normal;
+/* ===== CUPCAKE ===== */
+
+.cupcake{
+  font-size:54px;
+  animation: float 3s ease-in-out infinite;
 }
 
-/* MAIN LAYOUT */
-
-.container {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
 }
 
-/* SIDEBAR */
+/* ===== TITLE ===== */
 
-.sidebar {
-  width: 220px;
-
-  background: rgba(255,255,255,0.5);
-  backdrop-filter: blur(10px);
-
-  padding: 20px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-
-  color: #4B3B2F;
+.title{
+  margin-top:6px;
+  font-size:32px;
+  font-weight:bold;
+  color:#5B4332;
 }
 
-/* MAIN CONTENT */
+.subtitle{
+  margin-top:4px;
+  margin-bottom:28px;
 
-.main {
-  flex: 1;
-  padding: 20px;
-
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  font-size:14px;
+  color:#7A6554;
 }
 
-/* CARD */
+/* ===== BUTTON GRID ===== */
 
-.card {
-  background: rgba(255,255,255,0.7);
-  border-radius: 16px;
-
-  padding: 16px;
-
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-
-  min-height: 120px;
+.row{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  margin-bottom:20px;
 }
 
-/* SIDEBAR ITEMS */
+.btn{
+  width:180px;
+  padding:15px;
 
-.sidebar-item {
-  padding: 10px;
-  border-radius: 10px;
+  border:none;
+  border-radius:14px;
 
-  background: rgba(255,255,255,0.4);
+  background:#FFFDF9;
+  border:2px solid #E8D8C6;
 
-  cursor: pointer;
-  transition: 0.2s;
+  cursor:pointer;
+
+  font-size:14px;
+  color:#5B4332;
+
+  transition:.25s;
 }
 
-.sidebar-item:hover {
-  background: rgba(255,255,255,0.7);
-  transform: translateX(3px);
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 20px rgba(0,0,0,.08);
 }
 
-/* SMALL TITLE */
+/* ===== BOWL ===== */
 
-.logo {
-  font-size: 18px;
+.centerpiece{
+  margin:18px 0;
 }
 
+.steam{
+  font-size:18px;
+  opacity:.65;
+  animation: steam 2.5s ease-in-out infinite;
+}
+
+@keyframes steam{
+  0%{transform:translateY(0);opacity:.3;}
+  50%{transform:translateY(-6px);opacity:.9;}
+  100%{transform:translateY(0);opacity:.3;}
+}
+
+.bowl{
+  font-size:52px;
+}
+
+/* ===== ABOUT ===== */
+
+.line{
+  height:1px;
+  background:#E6D4C3;
+  margin:28px 0 20px 0;
+}
+
+.about-title{
+  font-size:18px;
+  font-weight:bold;
+  color:#5B4332;
+}
+
+.about{
+  margin-top:10px;
+  line-height:1.6;
+  font-size:14px;
+  color:#6E5948;
+}
+
+.footer{
+  margin-top:20px;
+  font-size:13px;
+  color:#8A7666;
+}
+
+/* mobile */
+
+@media(max-width:800px){
+
+.card{
+  width:90%;
+  padding:24px;
+}
+
+.row{
+  flex-direction:column;
+  align-items:center;
+}
+
+.btn{
+  width:100%;
+}
+}
 </style>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="logo">🧁 Willow Wisk</div>
+<div class="card">
 
-  <div class="nav">
-    <div>Status</div>
-    <div>Activity</div>
-    <div>Login</div>
-  </div>
-</div>
+  <div class="cupcake">🧁</div>
 
-<!-- BODY -->
-<div class="container">
+  <div class="title">Willow Wisk</div>
+  <div class="subtitle">Willow & Wisk Café</div>
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="sidebar-item">Status</div>
-    <div class="sidebar-item">Activity</div>
-    <div class="sidebar-item">Servers</div>
-    <div class="sidebar-item">Tickets</div>
-    <div class="sidebar-item">Partnerships</div>
-    <div class="sidebar-item">Settings</div>
+  <div class="row">
+    <button class="btn">Status</button>
+    <button class="btn">Activity</button>
   </div>
 
-  <!-- MAIN -->
-  <div class="main">
+  <div class="centerpiece">
+    <div class="steam">♨️</div>
+    <div class="bowl">🥣</div>
+  </div>
 
-    <div class="card">Overview Card</div>
-    <div class="card">Stats Card</div>
-    <div class="card">Live Activity</div>
-    <div class="card">Quick Actions</div>
+  <div class="row">
+    <button class="btn">Login</button>
+    <button class="btn">Add Discord</button>
+  </div>
 
+  <div class="line"></div>
+
+  <div class="about-title">
+    About Willow Wisk
+  </div>
+
+  <div class="about">
+    Willow Wisk is a bakery-themed Discord bot built
+    for tickets, partnerships, automation, moderation,
+    staff systems and complete server management.
+  </div>
+
+  <div class="footer">
+    bakery powered ✨
   </div>
 
 </div>

@@ -2,90 +2,10 @@
 <html>
 <head>
 <title>Willow Wisk</title>
-<link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-
-<!-- LOGIN -->
-<div id="login">
-  <h1>Willow Wisk</h1>
-  <button onclick="login()">Login with Discord</button>
-</div>
-
-<!-- SERVER PICKER -->
-<div id="picker" style="display:none;">
-  <h2>Select Server</h2>
-  <div id="guilds"></div>
-</div>
-
-<!-- DASHBOARD -->
-<div id="dashboard" style="display:none;">
-  <div class="sidebar">
-    <h3>Willow Wisk</h3>
-    <button>Home</button>
-    <button>Tickets</button>
-    <button>Partnerships</button>
-    <button>Moderation</button>
-    <button>Settings</button>
-  </div>
-
-  <div class="main">
-    <h1>Dashboard</h1>
-    <div id="content"></div>
-  </div>
-</div>
-
-<script>
-
-/* LOGIN */
-function login(){
-  window.location.href="/auth/discord";
-}
-
-/* CHECK LOGIN */
-async function check(){
-  const res = await fetch("/api/user");
-  const data = await res.json();
-
-  if(data.loggedIn){
-    document.getElementById("login").style.display="none";
-    loadGuilds();
-  }
-}
-
-/* LOAD SERVERS */
-async function loadGuilds(){
-  const res = await fetch("/api/guilds");
-  const guilds = await res.json();
-
-  document.getElementById("login").style.display="none";
-  document.getElementById("picker").style.display="block";
-
-  const box = document.getElementById("guilds");
-
-  guilds.forEach(g => {
-    const div = document.createElement("div");
-    div.innerHTML = `
-      <div class="card">
-        ${g.name}
-        <button onclick="openDashboard('${g.id}')">Manage</button>
-      </div>
-    `;
-    box.appendChild(div);
-  });
-}
-
-/* OPEN DASHBOARD */
-function openDashboard(id){
-  document.getElementById("picker").style.display="none";
-  document.getElementById("dashboard").style.display="flex";
-}
-
-/* INIT */
-check();
-
-</script>
-
+<body style="background:#f6efe6; text-align:center; font-family:Arial;">
+  <h1>🧁 Willow Wisk is Loading</h1>
+  <p>If you see this, website is fixed.</p>
 </body>
 </html>

@@ -4,6 +4,32 @@
 <title>Willow Wisk</title>
 
 <style>
+.particle {
+  position: fixed;
+  top: -20px;
+  width: 6px;
+  height: 6px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: fall linear infinite;
+  z-index: 0;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(110vh) translateX(40px);
+    opacity: 0;
+  }
+}
+
 body{
   margin:0;
   height:100vh;
@@ -32,6 +58,21 @@ body::before{
   to{transform:translateY(-300px);}
 }
 
+function createParticles(){
+  for(let i=0;i<25;i++){
+    const p = document.createElement("div");
+    p.className = "particle";
+
+    p.style.left = Math.random()*100 + "vw";
+    p.style.animationDuration = (5 + Math.random()*8) + "s";
+    p.style.opacity = Math.random();
+
+    document.body.appendChild(p);
+  }
+}
+
+createParticles();
+
 /* MAIN CARD */
 .card{
   width:760px;
@@ -47,6 +88,15 @@ body::before{
 
   text-align:center;
   position:relative;
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+}
+
+.particle {
+  z-index: 0;
 }
 
 /* CUPCAKE */

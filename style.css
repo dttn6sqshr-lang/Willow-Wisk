@@ -1,37 +1,142 @@
-body{
-  margin:0;
-  font-family:Arial;
-  background:#f6efe6;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #FAF4EC;
+  color: #5B4332;
 }
 
-#login{
-  text-align:center;
-  margin-top:200px;
+/* NAVBAR */
+.navbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
 }
 
-button{
-  padding:10px 14px;
-  border:none;
-  background:#fff7f0;
-  border-radius:10px;
-  cursor:pointer;
+.nav-links a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #5B4332;
 }
 
-.card{
-  background:white;
-  padding:10px;
-  margin:10px;
-  border-radius:10px;
+.btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #FFF9F2;
+  text-decoration: none;
+  color: #5B4332;
 }
 
-.sidebar{
-  width:200px;
-  background:white;
-  height:100vh;
-  padding:10px;
+.btn.ghost {
+  background: transparent;
+  border: 1px solid #E8D8C6;
 }
 
-.main{
-  flex:1;
-  padding:20px;
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.cupcake-glass {
+  font-size: 60px;
+  display: inline-block;
+  padding: 20px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(10px);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+h1 {
+  font-size: 48px;
+  margin: 10px 0;
+}
+
+.tagline {
+  opacity: 0.7;
+}
+
+/* TYPEWRITER */
+.typewriter {
+  margin-top: 20px;
+  font-size: 18px;
+  animation: fade 2s ease-in;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* HERO BUTTONS */
+.hero-buttons {
+  margin-top: 20px;
+}
+
+/* STATS */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px;
+}
+
+.stat {
+  background: #FFF9F2;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* FEATURES */
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 40px;
+}
+
+.card {
+  background: #FFF9F2;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* ROADMAP */
+.roadmap {
+  padding: 40px;
+}
+
+.roadmap ul {
+  list-style: none;
+  padding: 0;
+}
+
+.roadmap li {
+  background: #FFF9F2;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  opacity: 0.6;
 }

@@ -52,17 +52,17 @@
 <section class="stats">
 
   <div class="stat">
-    <h2>120+</h2>
+    <h2 id="servers">0</h2>
     <p>Servers</p>
   </div>
 
   <div class="stat">
-    <h2>43.8K</h2>
+    <h2 id="users">0</h2>
     <p>Users</p>
   </div>
 
   <div class="stat">
-    <h2>99.9%</h2>
+    <h2 id="uptime">0h</h2>
     <p>Uptime</p>
   </div>
 
@@ -71,6 +71,29 @@
 <footer>
   Willow Wisk • v1.0.0
 </footer>
+
+<script>
+async function loadStats() {
+  try {
+    const res = await fetch("/api/stats");
+    const data = await res.json();
+
+    document.getElementById("servers").innerText = data.servers + "+";
+    document.getElementById("users").innerText = data.users.toLocaleString();
+
+    const uptimeSec = Math.floor((Date.now() - data.uptime) / 1000);
+    const hours = Math.floor(uptimeSec / 3600);
+
+    document.getElementById("uptime").innerText = hours + "h";
+
+  } catch (e) {
+    console.log("Stats error", e);
+  }
+}
+
+loadStats();
+setInterval(loadStats, 30000);
+</script>
 
 </body>
 </html>

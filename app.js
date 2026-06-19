@@ -28,6 +28,14 @@ app.get("/test", (req, res) => {
   res.send("Website is working 🧁");
 });
 
+/* ======================
+   STATS API
+====================== */
+
+app.get("/api/stats", (req, res) => {
+  res.json(global.botStats);
+});
+
 /* START */
 app.listen(PORT, () => {
   console.log("Web running on " + PORT);

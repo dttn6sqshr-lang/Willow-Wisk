@@ -262,7 +262,8 @@ h1 {
 }
 
 .log-card:hover{
-  transform:translateY(-3px);
+  transform:translateY(-4px);
+  box-shadow: 0 0 20px rgba(255,182,193,0.2);
 }
 
 .log-card h2{

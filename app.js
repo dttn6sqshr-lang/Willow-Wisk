@@ -16,7 +16,7 @@ app.use(session({
 }));
 
 /* ======================
-   LOGIN MIDDLEWARE
+   LOGIN CHECK
 ====================== */
 
 function requireLogin(req, res, next) {
@@ -35,23 +35,19 @@ app.get("/", (req, res) => {
 });
 
 /* ======================
-   TEMP LOGIN (CLICK LOGIN)
+   LOGIN (TEMP)
 ====================== */
 
 app.get("/auth/discord", (req, res) => {
-  req.session.user = {
-    id: "temp",
-    username: "User"
-  };
-
-  res.redirect("/dashboard.html");
+  req.session.user = { id: "temp", username: "User" };
+  res.redirect("/dashboard");
 });
 
 /* ======================
-   DASHBOARD (PROTECTED)
+   DASHBOARD ROUTE (FIXED)
 ====================== */
 
-app.get("/dashboard.html", requireLogin, (req, res) => {
+app.get("/dashboard", requireLogin, (req, res) => {
   res.sendFile(path.join(__dirname, "dashboard.html"));
 });
 
@@ -59,12 +55,12 @@ app.get("/dashboard.html", requireLogin, (req, res) => {
    ERROR PAGE
 ====================== */
 
-app.get("/error.html", (req, res) => {
+app.get("/error", (req, res) => {
   res.sendFile(path.join(__dirname, "error.html"));
 });
 
 /* ======================
-   STATS API (KEEP FOR BOT)
+   STATS API
 ====================== */
 
 app.get("/api/stats", (req, res) => {
@@ -72,7 +68,7 @@ app.get("/api/stats", (req, res) => {
 });
 
 /* ======================
-   START SERVER
+   START
 ====================== */
 
 app.listen(PORT, () => {

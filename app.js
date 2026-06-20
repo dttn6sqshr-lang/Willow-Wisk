@@ -2,9 +2,13 @@ const express = require("express");
 const session = require("express-session");
 const axios = require("axios");
 const path = require("path");
+const http = require("http");
+const { Server } = require("socket.io");
 
 const app = express();
+const server = http.createServer(app);
 const PORT = process.env.PORT || 25414;
+const io = new Server(server);
 
 require("./index.js");
 const { client } = require("./index.js");

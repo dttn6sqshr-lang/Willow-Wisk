@@ -7,6 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 25414;
 
 require("./index.js");
+const { client } = require("./index.js");
 app.use(express.static(__dirname));
 
 /* ======================
@@ -225,6 +226,18 @@ app.get("/api/bakerylog", (req, res) => {
 
 app.get("/server.html", requireLogin, (req, res) => {
   res.sendFile(path.join(__dirname, "server.html"));
+});
+
+app.get("/api/checkbot/:guildId", (req, res) => {
+
+  const guildId = req.params.guildId;
+
+  const guild = client.guilds.cache.get(guildId);
+
+  res.json({
+    inServer: !!guild
+  });
+
 });
 /* ======================
    START SERVER

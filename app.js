@@ -178,6 +178,26 @@ app.get("/status.html", (req, res) => {
   res.sendFile(path.join(__dirname, "status.html"));
 });
 
+app.get("/api/bakerylog", (req, res) => {
+  res.json([
+    {
+      title: "🧁 Batch #005",
+      text: "Added live Bakery Log system with API updates.",
+      time: Date.now()
+    },
+    {
+      title: "🥐 Batch #004",
+      text: "Improved dashboard server selection UI.",
+      time: Date.now() - 60000
+    },
+    {
+      title: "🍓 Batch #003",
+      text: "Fixed OAuth login flow and callback system.",
+      time: Date.now() - 120000
+    }
+  ]);
+});
+
 /* ======================
    START SERVER
 ====================== */

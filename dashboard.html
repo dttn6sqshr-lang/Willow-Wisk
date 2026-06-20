@@ -55,7 +55,7 @@ async function loadGuilds() {
 
       card.innerHTML = `
         <div style="font-weight:bold">${g.name}</div>
-        <div style="opacity:0.6;font-size:12px">${g.members} members</div>
+        <div style="opacity:0.6;font-size:12px">${g.members ?? 0} members</div>
       `;
 
       card.onclick = () => {

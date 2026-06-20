@@ -198,6 +198,9 @@ app.get("/api/bakerylog", (req, res) => {
   ]);
 });
 
+app.get("/server.html", requireLogin, (req, res) => {
+  res.sendFile(path.join(__dirname, "server.html"));
+});
 /* ======================
    START SERVER
 ====================== */

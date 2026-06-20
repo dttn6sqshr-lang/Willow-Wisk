@@ -26,10 +26,10 @@
       Online
     </div>
 
-    <div class="actions">
-      <a href="/auth/discord">Login</a>
-      <a class="btn" href="#">Invite</a>
-    </div>
+    <div class="actions" id="authButtons">
+  <a href="/auth/discord">Login</a>
+  <a class="btn" href="#">Invite</a>
+</div>
 
   </div>
 </div>
@@ -93,6 +93,20 @@ async function loadStats() {
 
 loadStats();
 setInterval(loadStats, 30000);
+</script>
+
+<script>
+async function checkLogin() {
+  const res = await fetch("/api/session");
+  const data = await res.json();
+
+  if (data.loggedIn) {
+    document.getElementById("authButtons").innerHTML =
+      '<a href="/dashboard">Dashboard</a>';
+  }
+}
+
+checkLogin();
 </script>
 
 </body>

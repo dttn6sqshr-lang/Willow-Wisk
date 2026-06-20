@@ -243,6 +243,36 @@ h1 {
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
+.log-container{
+  width:80%;
+  margin:auto;
+  margin-top:40px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.log-card{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:25px;
+  border-radius:18px;
+  backdrop-filter:blur(10px);
+  transition:0.3s;
+}
+
+.log-card:hover{
+  transform:translateY(-3px);
+}
+
+.log-card h2{
+  margin-bottom:10px;
+}
+
+.log-card small{
+  opacity:0.6;
+}
+
 /* ================= FOOTER ================= */
 
 footer {

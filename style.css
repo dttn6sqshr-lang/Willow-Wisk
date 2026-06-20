@@ -323,6 +323,22 @@ h1 {
   transform:translateY(-4px);
 }
 
+.status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+}
+
+.status .dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:gray;
+  display:inline-block;
+  box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
 /* ================= FOOTER ================= */
 
 footer {

@@ -96,16 +96,12 @@ app.get("/auth/discord", (req, res) => {
    OAUTH CALLBACK
 ====================== */
 
-app.get("/auth/discord/callback", async (req, res) => {
+app.get("/callback", async (req, res) => {
   const code = req.query.code;
 
-  if (!code) {
-    return res.redirect("/error.html");
-  }
+  if (!code) return res.redirect("/error.html");
 
   try {
-    const axios = require("axios");
-
     const tokenRes = await axios.post(
       "https://discord.com/api/oauth2/token",
       new URLSearchParams({
@@ -124,11 +120,14 @@ app.get("/auth/discord/callback", async (req, res) => {
 
     const accessToken = tokenRes.data.access_token;
 
-    const userRes = await axios.get("https://discord.com/api/users/@me", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
+    const userRes = await axios.get(
+      "https://discord.com/api/users/@me",
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
       }
-    });
+    );
 
     req.session.user = userRes.data;
 

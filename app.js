@@ -5,7 +5,7 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 25414;
 
-require("./index.js");
+const { client } = require("./index.js");
 
 app.use(express.static(__dirname));
 
@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
 });
 
 /* ======================
-   LOGIN (TEMP)
+   FAKE LOGIN (TEMP)
 ====================== */
 
 app.get("/auth/discord", (req, res) => {
@@ -44,7 +44,7 @@ app.get("/auth/discord", (req, res) => {
 });
 
 /* ======================
-   DASHBOARD ROUTE (FIXED)
+   DASHBOARD
 ====================== */
 
 app.get("/dashboard", requireLogin, (req, res) => {
@@ -65,6 +65,28 @@ app.get("/error", (req, res) => {
 
 app.get("/api/stats", (req, res) => {
   res.json(global.botStats || {});
+});
+
+/* ======================
+   GUILDS API (REAL SERVERS)
+====================== */
+
+app.get("/api/guilds", (req, res) => {
+
+  if (!req.session.user) {
+    return res.status(401).json({ error: "Not logged in" });
+  }
+
+  const guilds = client.guilds.cache.map(g => ({
+    id: g.id,
+    name: g.name,
+    icon: g.icon
+      ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png`
+      : null,
+    members: g.memberCount
+  }));
+
+  res.json(guilds);
 });
 
 /* ======================

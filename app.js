@@ -30,7 +30,6 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/home.html");
 });
 
-/* FIX FOR /home.html */
 app.get("/home.html", (req, res) => {
   res.sendFile(__dirname + "/home.html");
 });
@@ -65,16 +64,12 @@ app.get("/auth/discord", (req, res) => {
 });
 
 /* ======================
-   DASHBOARD (PROTECTED)
+   DASHBOARD
 ====================== */
 
 app.get("/dashboard", requireLogin, (req, res) => {
   res.sendFile(__dirname + "/dashboard.html");
 });
-
-/* ======================
-   DASHBOARD DIRECT FILE FIX
-====================== */
 
 app.get("/dashboard.html", requireLogin, (req, res) => {
   res.sendFile(__dirname + "/dashboard.html");
@@ -94,6 +89,27 @@ app.get("/error.html", (req, res) => {
 
 app.get("/api/stats", (req, res) => {
   res.json(global.botStats);
+});
+
+/* ======================
+   TEMP GUILDS API
+====================== */
+
+app.get("/api/guilds", (req, res) => {
+  res.json([
+    {
+      name: "Willow Wisk Support",
+      members: 245
+    },
+    {
+      name: "Bakery Testing Server",
+      members: 87
+    },
+    {
+      name: "Cupcake Community",
+      members: 501
+    }
+  ]);
 });
 
 /* ======================

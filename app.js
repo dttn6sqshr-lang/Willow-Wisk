@@ -95,21 +95,28 @@ app.get("/api/stats", (req, res) => {
    TEMP GUILDS API
 ====================== */
 
+const { client } = require("./index.js");
+
 app.get("/api/guilds", (req, res) => {
-  res.json([
-    {
-      name: "Willow Wisk Support",
-      members: 245
-    },
-    {
-      name: "Bakery Testing Server",
-      members: 87
-    },
-    {
-      name: "Cupcake Community",
-      members: 501
-    }
-  ]);
+
+  if (!req.session.user) {
+    return res.status(401).json({ error: "Not logged in" });
+  }
+
+  if (!client || !client.guilds) {
+    return res.json([]);
+  }
+
+  const guilds = client.guilds.cache.map(g => ({
+    id: g.id,
+    name: g.name,
+    icon: g.icon
+      ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png`
+      : null,
+    members: g.memberCount || 0
+  }));
+
+  res.json(guilds);
 });
 
 /* ======================

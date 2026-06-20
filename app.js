@@ -12,9 +12,9 @@ require("./index.js");
    DISCORD OAUTH CONFIG
 ====================== */
 
-const CLIENT_ID = "YOUR_CLIENT_ID";
-const CLIENT_SECRET = "YOUR_CLIENT_SECRET";
-const REDIRECT_URI = "http://localhost:25414/auth/discord/callback";
+const CLIENT_ID = "1514467728390623343";
+const CLIENT_SECRET = "wkn52DREW39kMHACbCRFPmnH1FZzh6Db";
+const REDIRECT_URI = "https://willowwisk.apps.bot-hosting.cloud/callback";
 
 /* ======================
    SESSION

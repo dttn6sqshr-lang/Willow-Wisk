@@ -8,7 +8,7 @@ const client = new Client({
 });
 
 /* ======================
-   GLOBAL STATS
+   GLOBAL DATA
 ====================== */
 
 global.botStats = {
@@ -18,36 +18,37 @@ global.botStats = {
 };
 
 /* ======================
-   READY EVENT
+   READY
 ====================== */
 
-client.once("ready", () => {
-  console.log(`Bot online`);
+client.once("ready", async () => {
+  console.log("Bot online");
+
+  await client.guilds.fetch();
 
   updateStats();
 });
 
 /* ======================
-   UPDATE FUNCTION
+   STATS UPDATE
 ====================== */
 
 function updateStats() {
-  if (!client.isReady()) return;
+  global.botStats.servers = client.guilds.cache.size;
 
-  botStats.servers = client.guilds.cache.size;
-
-  botStats.users = client.guilds.cache.reduce((acc, guild) => {
-    return acc + (guild.memberCount || 0);
+  global.botStats.users = client.guilds.cache.reduce((acc, g) => {
+    return acc + (g.memberCount || 0);
   }, 0);
 
-  botStats.uptime = Date.now();
+  global.botStats.uptime = Date.now();
 }
 
-/* live refresh */
 setInterval(updateStats, 60000);
 
 /* ======================
-   LOGIN
+   EXPORT CLIENT
 ====================== */
+
+module.exports = { client };
 
 client.login(process.env.TOKEN);

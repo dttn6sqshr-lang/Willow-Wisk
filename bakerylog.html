@@ -36,6 +36,39 @@
 <section class="log-container" id="logContainer">
 </section>
 
+<script>
+async function loadLog() {
+  try {
+    const res = await fetch("/api/bakerylog");
+    const logs = await res.json();
+
+    const container = document.getElementById("logContainer");
+    container.innerHTML = "";
+
+    logs.forEach(log => {
+      const card = document.createElement("div");
+      card.className = "log-card";
+
+      const time = new Date(log.time).toLocaleTimeString();
+
+      card.innerHTML = `
+        <h2>${log.title}</h2>
+        <p>${log.text}</p>
+        <small>${time}</small>
+      `;
+
+      container.appendChild(card);
+    });
+
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+loadLog();
+setInterval(loadLog, 10000);
+</script>
+
 <footer>
   Willow Wisk • Baking new features daily
 </footer>

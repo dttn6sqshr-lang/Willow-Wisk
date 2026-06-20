@@ -147,21 +147,30 @@ app.get("/api/stats", (req, res) => {
 
 const { client } = require("./index.js");
 
-app.get("/api/guilds", (req, res) => {
-  if (!req.session.user) {
-    return res.status(401).json({ error: "Not logged in" });
+app.get("/api/guilds", async (req, res) => {
+
+  if (!req.session.accessToken) {
+    return res.status(401).json([]);
   }
 
-  const guilds = client.guilds.cache.map(g => ({
-    id: g.id,
-    name: g.name,
-    members: g.memberCount || 0,
-    icon: g.icon
-      ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png`
-      : null
-  }));
+  try {
 
-  res.json(guilds);
+    const guildRes = await axios.get(
+      "https://discord.com/api/users/@me/guilds",
+      {
+        headers: {
+          Authorization: `Bearer ${req.session.accessToken}`
+        }
+      }
+    );
+
+    res.json(guildRes.data);
+
+  } catch (err) {
+    console.log(err);
+    res.json([]);
+  }
+
 });
 
 app.get("/api/session", (req, res) => {

@@ -230,6 +230,10 @@ function addLog(title, text) {
 
 }
 
+function autoLog(eventName, message) {
+  addLog("🧁 System Update: " + eventName, message);
+}
+
 app.get("/server.html", requireLogin, (req, res) => {
   res.sendFile(path.join(__dirname, "server.html"));
 });
@@ -251,4 +255,6 @@ app.get("/api/checkbot/:guildId", (req, res) => {
 
 server.listen(PORT, () => {
   console.log("Web running on " + PORT);
+
+  autoLog("Server Started", "Willow Wisk backend is now running");
 });

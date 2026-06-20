@@ -5,38 +5,76 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 25414;
 
-/* BOT */
 require("./index.js");
 
-/* IMPORTANT: SERVE CSS/JS/IMAGES */
 app.use(express.static(__dirname));
 
-/* SESSION */
 app.use(session({
   secret: "willow-wisk-secret",
   resave: false,
   saveUninitialized: true
 }));
 
-/* HOME */
+/* ======================
+   LOGIN MIDDLEWARE
+====================== */
+
+function requireLogin(req, res, next) {
+  if (!req.session.user) {
+    return res.redirect("/error.html");
+  }
+  next();
+}
+
+/* ======================
+   HOME
+====================== */
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "home.html"));
 });
 
-/* TEST */
-app.get("/test", (req, res) => {
-  res.send("Website is working 🧁");
+/* ======================
+   TEMP LOGIN (CLICK LOGIN)
+====================== */
+
+app.get("/auth/discord", (req, res) => {
+  req.session.user = {
+    id: "temp",
+    username: "User"
+  };
+
+  res.redirect("/dashboard.html");
 });
 
 /* ======================
-   STATS API
+   DASHBOARD (PROTECTED)
+====================== */
+
+app.get("/dashboard.html", requireLogin, (req, res) => {
+  res.sendFile(path.join(__dirname, "dashboard.html"));
+});
+
+/* ======================
+   ERROR PAGE
+====================== */
+
+app.get("/error.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "error.html"));
+});
+
+/* ======================
+   STATS API (KEEP FOR BOT)
 ====================== */
 
 app.get("/api/stats", (req, res) => {
-  res.json(global.botStats);
+  res.json(global.botStats || {});
 });
 
-/* START */
+/* ======================
+   START SERVER
+====================== */
+
 app.listen(PORT, () => {
   console.log("Web running on " + PORT);
 });

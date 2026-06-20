@@ -4,22 +4,17 @@ const session = require("express-session");
 const app = express();
 const PORT = process.env.PORT || 25414;
 
-/* bot import */
+/* BOT */
 require("./index.js");
 
-/* IMPORTANT:
-   DO NOT serve all files automatically
-   (this was breaking dashboard)
-*/
-
-/* session */
+/* SESSION */
 app.use(session({
   secret: "willow-wisk-secret",
   resave: false,
   saveUninitialized: true
 }));
 
-/* login check */
+/* LOGIN CHECK */
 function requireLogin(req, res, next) {
   if (!req.session.user) {
     return res.redirect("/error.html");
@@ -35,8 +30,13 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/home.html");
 });
 
+/* FIX FOR /home.html */
+app.get("/home.html", (req, res) => {
+  res.sendFile(__dirname + "/home.html");
+});
+
 /* ======================
-   FEATURES PAGE
+   FEATURES
 ====================== */
 
 app.get("/features.html", (req, res) => {
@@ -44,7 +44,7 @@ app.get("/features.html", (req, res) => {
 });
 
 /* ======================
-   STYLE FILE
+   CSS
 ====================== */
 
 app.get("/style.css", (req, res) => {
@@ -73,7 +73,15 @@ app.get("/dashboard", requireLogin, (req, res) => {
 });
 
 /* ======================
-   ERROR PAGE
+   DASHBOARD DIRECT FILE FIX
+====================== */
+
+app.get("/dashboard.html", requireLogin, (req, res) => {
+  res.sendFile(__dirname + "/dashboard.html");
+});
+
+/* ======================
+   ERROR
 ====================== */
 
 app.get("/error.html", (req, res) => {
@@ -81,7 +89,7 @@ app.get("/error.html", (req, res) => {
 });
 
 /* ======================
-   STATS API (RESTORED)
+   STATS API
 ====================== */
 
 app.get("/api/stats", (req, res) => {

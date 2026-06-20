@@ -193,6 +193,31 @@ h1 {
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
+/* ================= FEATURES PAGE ================= */
+
+.features-page {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 60px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.feature-card {
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(232,216,198,0.5);
+  border-radius: 18px;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
 /* ================= FOOTER ================= */
 
 footer {

@@ -127,5 +127,33 @@ async function checkLogin() {
 checkLogin();
 </script>
 
+<script>
+async function loadStatus() {
+  try {
+    const res = await fetch("/api/stats");
+    const data = await res.json();
+
+    const dot = document.getElementById("statusDot");
+    const text = document.getElementById("statusText");
+
+    if (!data || !data.servers) {
+      dot.style.background = "red";
+      text.innerText = "Offline";
+      return;
+    }
+
+    dot.style.background = "#4ade80";
+    text.innerText = "Online";
+
+  } catch (e) {
+    document.getElementById("statusDot").style.background = "red";
+    document.getElementById("statusText").innerText = "Offline";
+  }
+}
+
+loadStatus();
+setInterval(loadStatus, 15000);
+</script>
+
 </body>
 </html>

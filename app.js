@@ -123,8 +123,9 @@ app.get("/callback", async (req, res) => {
     );
 
     req.session.user = userRes.data;
+req.session.accessToken = accessToken;
 
-    res.redirect("/dashboard");
+res.redirect("/dashboard");
 
   } catch (err) {
     console.log(err);

@@ -170,6 +170,10 @@ app.get("/api/session", (req, res) => {
   });
 });
 
+app.get("/bakerylog.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "bakerylog.html"));
+});
+
 /* ======================
    START SERVER
 ====================== */

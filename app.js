@@ -7,7 +7,6 @@ const app = express();
 const PORT = process.env.PORT || 25414;
 
 require("./index.js");
-const { client } = require("./index.js");
 app.use(express.static(__dirname));
 
 /* ======================

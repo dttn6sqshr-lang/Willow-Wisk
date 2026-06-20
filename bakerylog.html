@@ -36,37 +36,51 @@
 <section class="log-container" id="logContainer">
 </section>
 
+<script src="/socket.io/socket.io.js"></script>
+
 <script>
+const socket = io();
+const container = document.getElementById("logContainer");
+
+/* load existing logs when page opens */
 async function loadLog() {
-  try {
-    const res = await fetch("/api/bakerylog");
-    const logs = await res.json();
+  const res = await fetch("/api/bakerylog");
+  const logs = await res.json();
 
-    const container = document.getElementById("logContainer");
-    container.innerHTML = "";
+  container.innerHTML = "";
 
-    logs.forEach(log => {
-      const card = document.createElement("div");
-      card.className = "log-card";
+  logs.forEach(log => {
+    addCard(log, false);
+  });
+}
 
-      const time = new Date(log.time).toLocaleTimeString();
+/* make card */
+function addCard(log, newest = true) {
 
-      card.innerHTML = `
-        <h2>${log.title}</h2>
-        <p>${log.text}</p>
-        <small>${time}</small>
-      `;
+  const card = document.createElement("div");
+  card.className = "log-card";
 
-      container.appendChild(card);
-    });
+  const time = new Date(log.time).toLocaleTimeString();
 
-  } catch (err) {
-    console.log(err);
+  card.innerHTML = `
+    <h2>${log.title}</h2>
+    <p>${log.text}</p>
+    <small>${time}</small>
+  `;
+
+  if (newest) {
+    container.prepend(card);
+  } else {
+    container.appendChild(card);
   }
 }
 
+/* listen for live updates */
+socket.on("newLog", (log) => {
+  addCard(log, true);
+});
+
 loadLog();
-setInterval(loadLog, 10000);
 </script>
 
 <footer>

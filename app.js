@@ -7,6 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 25414;
 
 require("./index.js");
+app.use(express.static(__dirname));
 
 /* ======================
    DISCORD OAUTH CONFIG
@@ -47,14 +48,6 @@ app.get("/", (req, res) => {
 
 app.get("/home.html", (req, res) => {
   res.sendFile(path.join(__dirname, "home.html"));
-});
-
-/* ======================
-   FEATURES
-====================== */
-
-app.get("/features.html", (req, res) => {
-  res.sendFile(path.join(__dirname, "features.html"));
 });
 
 /* ======================
@@ -168,6 +161,13 @@ app.get("/api/guilds", (req, res) => {
   }));
 
   res.json(guilds);
+});
+
+app.get("/api/session", (req, res) => {
+  res.json({
+    loggedIn: !!req.session.user,
+    user: req.session.user || null
+  });
 });
 
 /* ======================

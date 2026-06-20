@@ -144,9 +144,6 @@ app.get("/api/stats", (req, res) => {
 /* ======================
    GUILDS API (REAL BOT SERVERS)
 ====================== */
-
-const { client } = require("./index.js");
-
 app.get("/api/guilds", async (req, res) => {
 
   if (!req.session.accessToken) {

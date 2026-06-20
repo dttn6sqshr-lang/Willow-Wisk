@@ -50,4 +50,4 @@ setInterval(updateStats, 60000);
    LOGIN
 ====================== */
 
-client.login("YOUR_BOT_TOKEN");
+client.login(process.env.TOKEN);

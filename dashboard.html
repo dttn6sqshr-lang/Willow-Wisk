@@ -53,10 +53,25 @@ async function loadGuilds() {
       const card = document.createElement("div");
       card.className = "server-card";
 
-      card.innerHTML = `
-        <div style="font-weight:bold">${g.name}</div>
-        <div style="opacity:0.6;font-size:12px">${g.members ?? 0} members</div>
-      `;
+      const icon = g.icon
+  ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png`
+  : "https://cdn.discordapp.com/embed/avatars/0.png";
+
+card.innerHTML = `
+  <div style="display:flex;align-items:center;gap:12px;">
+
+    <img src="${icon}"
+         style="width:45px;height:45px;border-radius:50%;">
+
+    <div>
+      <div style="font-weight:bold">${g.name}</div>
+      <div style="opacity:0.6;font-size:12px">
+        Click to manage
+      </div>
+    </div>
+
+  </div>
+`;
 
       card.onclick = () => {
   localStorage.setItem("selectedGuild", g.id);

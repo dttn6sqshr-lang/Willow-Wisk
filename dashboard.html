@@ -14,7 +14,7 @@
     <div class="logo">🥐 ᰔ</div>
 
     <div class="links">
-      <a href="/">Home</a>
+      <a href="/home.html">Home</a>
       <a href="/dashboard">Dashboard</a>
       <a href="/features.html">Features</a>
     </div>
@@ -37,27 +37,40 @@
 
 <script>
 async function loadGuilds() {
-  const res = await fetch("/api/guilds");
-  const guilds = await res.json();
+  try {
+    const res = await fetch("/api/guilds");
 
-  const grid = document.getElementById("serverGrid");
-  grid.innerHTML = "";
+    if (!res.ok) {
+      throw new Error("Guild API failed");
+    }
 
-  guilds.forEach(g => {
-    const card = document.createElement("div");
-    card.className = "server-card";
+    const guilds = await res.json();
 
-    card.innerHTML = `
-      <div style="font-weight:bold">${g.name}</div>
-      <div style="opacity:0.6;font-size:12px">${g.members || 0} members</div>
-    `;
+    const grid = document.getElementById("serverGrid");
+    grid.innerHTML = "";
 
-    card.onclick = () => {
-      alert("Selected: " + g.name);
-    };
+    guilds.forEach(g => {
+      const card = document.createElement("div");
+      card.className = "server-card";
 
-    grid.appendChild(card);
-  });
+      card.innerHTML = `
+        <div style="font-weight:bold">${g.name}</div>
+        <div style="opacity:0.6;font-size:12px">${g.members} members</div>
+      `;
+
+      card.onclick = () => {
+        alert("Selected: " + g.name);
+      };
+
+      grid.appendChild(card);
+    });
+
+  } catch (err) {
+    document.getElementById("serverGrid").innerHTML =
+      "<p>Failed loading servers.</p>";
+
+    console.log(err);
+  }
 }
 
 loadGuilds();

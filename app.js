@@ -217,11 +217,17 @@ app.get("/api/bakerylog", (req, res) => {
 });
 
 function addLog(title, text) {
-  bakeryLog.unshift({
+
+  const newLog = {
     title,
     text,
     time: Date.now()
-  });
+  };
+
+  bakeryLog.unshift(newLog);
+
+  io.emit("newLog", newLog);
+
 }
 
 app.get("/server.html", requireLogin, (req, res) => {

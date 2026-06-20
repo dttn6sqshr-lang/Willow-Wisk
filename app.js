@@ -164,7 +164,22 @@ app.get("/api/guilds", async (req, res) => {
       }
     );
 
-    res.json(guildRes.data);
+    const guilds = guildRes.data;
+
+const filtered = guilds.filter(g => {
+
+  const perms = BigInt(g.permissions);
+
+  const ADMIN = 0x8n;
+  const MANAGE_GUILD = 0x20n;
+
+  return (
+    (perms & ADMIN) === ADMIN ||
+    (perms & MANAGE_GUILD) === MANAGE_GUILD
+  );
+});
+
+res.json(filtered);
 
   } catch (err) {
     console.log(err);

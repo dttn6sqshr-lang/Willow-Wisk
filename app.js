@@ -243,6 +243,6 @@ app.get("/api/checkbot/:guildId", (req, res) => {
    START SERVER
 ====================== */
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log("Web running on " + PORT);
 });

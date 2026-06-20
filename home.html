@@ -81,8 +81,8 @@ async function loadStats() {
     const res = await fetch("/api/stats");
     const data = await res.json();
 
-    document.getElementById("servers").innerText = data.servers + "+";
-    document.getElementById("users").innerText = data.users.toLocaleString();
+    animateNumber("servers", data.servers);
+    animateNumber("users", data.users);
 
     const uptimeSec = Math.floor((Date.now() - data.uptime) / 1000);
     const hours = Math.floor(uptimeSec / 3600);
@@ -90,8 +90,23 @@ async function loadStats() {
     document.getElementById("uptime").innerText = hours + "h";
 
   } catch (e) {
-    console.log("Stats error", e);
+    console.log(e);
   }
+}
+
+function animateNumber(id, target) {
+  let el = document.getElementById(id);
+  let current = 0;
+  let step = Math.ceil(target / 40);
+
+  let interval = setInterval(() => {
+    current += step;
+    if (current >= target) {
+      current = target;
+      clearInterval(interval);
+    }
+    el.innerText = current.toLocaleString();
+  }, 20);
 }
 
 loadStats();

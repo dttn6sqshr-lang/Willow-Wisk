@@ -47,7 +47,11 @@ app.get("/auth/discord", (req, res) => {
    DASHBOARD
 ====================== */
 
-app.get("/dashboard", requireLogin, (req, res) => {
+app.get("/dashboard", (req, res) => {
+  if (!req.session.user) {
+    return res.redirect("/error");
+  }
+
   res.sendFile(path.join(__dirname, "dashboard.html"));
 });
 

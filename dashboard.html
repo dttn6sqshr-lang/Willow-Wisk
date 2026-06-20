@@ -8,7 +8,6 @@
 
 <body>
 
-<!-- NAV -->
 <div class="navbar">
   <div class="nav-pill">
 
@@ -16,7 +15,7 @@
 
     <div class="links">
       <a href="/">Home</a>
-      <a href="/dashboard.html">Dashboard</a>
+      <a href="/dashboard">Dashboard</a>
       <a href="/features.html">Features</a>
     </div>
 
@@ -28,23 +27,41 @@
   </div>
 </div>
 
-<!-- HERO -->
 <section class="hero">
-
   <h1>Select a Server</h1>
   <p class="subtitle">choose a server to manage Willow Wisk</p>
-
 </section>
 
-<!-- SERVER PICKER -->
-<section class="server-grid">
-
-  <div class="server-card">Server A</div>
-  <div class="server-card">Server B</div>
-  <div class="server-card">Server C</div>
-  <div class="server-card">Server D</div>
-
+<section class="server-grid" id="serverGrid">
 </section>
+
+<script>
+async function loadGuilds() {
+  const res = await fetch("/api/guilds");
+  const guilds = await res.json();
+
+  const grid = document.getElementById("serverGrid");
+  grid.innerHTML = "";
+
+  guilds.forEach(g => {
+    const card = document.createElement("div");
+    card.className = "server-card";
+
+    card.innerHTML = `
+      <div style="font-weight:bold">${g.name}</div>
+      <div style="opacity:0.6;font-size:12px">${g.members || 0} members</div>
+    `;
+
+    card.onclick = () => {
+      alert("Selected: " + g.name);
+    };
+
+    grid.appendChild(card);
+  });
+}
+
+loadGuilds();
+</script>
 
 </body>
 </html>

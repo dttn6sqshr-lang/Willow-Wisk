@@ -59,8 +59,9 @@ async function loadGuilds() {
       `;
 
       card.onclick = () => {
-        alert("Selected: " + g.name);
-      };
+  localStorage.setItem("selectedGuild", g.id);
+  window.location.href = "/server.html";
+};
 
       grid.appendChild(card);
     });

@@ -174,6 +174,10 @@ app.get("/bakerylog.html", (req, res) => {
   res.sendFile(path.join(__dirname, "bakerylog.html"));
 });
 
+app.get("/status.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "status.html"));
+});
+
 /* ======================
    START SERVER
 ====================== */

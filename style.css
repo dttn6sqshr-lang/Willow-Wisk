@@ -638,6 +638,32 @@ body::after{
   opacity:0.6;
 }
 
+.server-top{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.server-icon{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+
+  object-fit:cover;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.server-name{
+  font-weight:600;
+  font-size:15px;
+}
+
+.server-members{
+  opacity:0.6;
+  font-size:12px;
+}
+
 /* ================= FOOTER ================= */
 
 footer {

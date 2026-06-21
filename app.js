@@ -256,5 +256,8 @@ app.get("/api/checkbot/:guildId", (req, res) => {
 server.listen(PORT, () => {
   console.log("Web running on " + PORT);
 
-  autoLog("Server Started", "Willow Wisk backend is now running");
+  autoLog(
+    "Server Started",
+    "Willow Wisk backend is now running"
+  );
 });

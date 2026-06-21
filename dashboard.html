@@ -40,6 +40,7 @@
 async function loadGuilds() {
   const res = await fetch("/api/guilds");
   const guilds = await res.json();
+  console.log(guilds);
 
   const grid = document.getElementById("serverGrid");
   grid.innerHTML = "";

@@ -1,36 +1,45 @@
 /* ================= BASE ================= */
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: #5B4332;
-  background: radial-gradient(circle at top, #fff3e6, #f6efe6, #f2e6d8);
-  overflow-x: hidden;
+body{
+  background: linear-gradient(
+    135deg,
+    #fff8f2,
+    #fde8d7,
+    #fff2eb
+  );
+
+  min-height:100vh;
 }
 
 /* ================= NAVBAR ================= */
 
-.navbar {
-  position: fixed;
-  top: 18px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  z-index: 999;
+.navbar{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  margin-top:20px;
 }
 
-.nav-pill {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 12px 18px;
-  border-radius: 60px;
+.nav-pill{
+  width:88%;
+  padding:14px 24px;
 
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(232, 216, 198, 0.6);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  border-radius:18px;
+
+  box-shadow:
+    0 8px 30px rgba(0,0,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 .links a {

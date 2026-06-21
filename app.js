@@ -180,15 +180,6 @@ app.get("/api/guilds", async (req, res) => {
   }
 });
 
-res.json(filtered);
-
-  } catch (err) {
-    console.log(err);
-    res.json([]);
-  }
-
-});
-
 app.get("/api/session", (req, res) => {
   res.json({
     loggedIn: !!req.session.user,

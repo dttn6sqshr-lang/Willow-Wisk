@@ -173,14 +173,20 @@ app.get("/api/guilds", async (req, res) => {
       (perms & MANAGE_GUILD) === MANAGE_GUILD
     );
   })
-  .map(g => ({
+.map(g => {
+  const botGuild = client.guilds.cache.get(g.id);
+
+  return {
     id: g.id,
     name: g.name,
 
     icon: g.icon
       ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png?size=128`
-      : null
-  }));
+      : null,
+
+    members: botGuild ? botGuild.memberCount : "?"
+  };
+});
 
 res.json(filtered);
   } catch (err) {

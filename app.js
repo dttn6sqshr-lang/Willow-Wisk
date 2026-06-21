@@ -180,17 +180,6 @@ app.get("/api/guilds", async (req, res) => {
   }
 });
 
-  const perms = BigInt(g.permissions);
-
-  const ADMIN = 0x8n;
-  const MANAGE_GUILD = 0x20n;
-
-  return (
-    (perms & ADMIN) === ADMIN ||
-    (perms & MANAGE_GUILD) === MANAGE_GUILD
-  );
-});
-
 res.json(filtered);
 
   } catch (err) {

@@ -581,6 +581,20 @@ body::after{
   border:1px solid rgba(255,255,255,0.12);
 }
 
+.dashboard-header{
+  text-align:center;
+  padding:40px 20px 10px;
+}
+
+.dashboard-header h1{
+  font-size:32px;
+  margin-bottom:8px;
+}
+
+.dashboard-header .subtitle{
+  opacity:0.6;
+}
+
 /* ================= FOOTER ================= */
 
 footer {

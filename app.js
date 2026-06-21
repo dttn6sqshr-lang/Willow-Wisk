@@ -165,9 +165,14 @@ app.get("/api/guilds", async (req, res) => {
       }
     );
 
-    const guilds = guildRes.data;
-
-const filtered = guilds.filter(g => {
+    const guilds = guildRes.data.map(g => ({
+  id: g.id,
+  name: g.name,
+  members: g.approximate_member_count || 0,
+  icon: g.icon
+    ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png?size=128`
+    : null
+}));
 
   const perms = BigInt(g.permissions);
 

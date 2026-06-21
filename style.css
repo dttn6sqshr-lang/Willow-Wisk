@@ -8,8 +8,11 @@ body{
     #fff2eb
   );
 
+position: relative;
+overflow-x: hidden;
   min-height:100vh;
 }
+
 
 /* ================= NAVBAR ================= */
 
@@ -451,6 +454,57 @@ background: rgba(255,255,255,0.10);
   background:gray;
   display:inline-block;
   box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+/* background blobs */
+
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  border-radius:50%;
+  z-index:-1;
+  filter: blur(80px);
+
+  animation: floatBlob 12s ease-in-out infinite;
+}
+
+body::before{
+  width:320px;
+  height:320px;
+
+  background: rgba(255,220,190,0.55);
+
+  top:80px;
+  left:-80px;
+}
+
+body::after{
+  width:260px;
+  height:260px;
+
+  background: rgba(255,190,210,0.45);
+
+  bottom:60px;
+  right:-50px;
+
+  animation-delay:2s;
+}
+
+@keyframes floatBlob{
+
+  0%{
+    transform: translateY(0px);
+  }
+
+  50%{
+    transform: translateY(-25px);
+  }
+
+  100%{
+    transform: translateY(0px);
+  }
+
 }
 
 /* ================= FOOTER ================= */

@@ -260,7 +260,13 @@ background: rgba(255,255,255,0.10);
 
 .server-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+  box-shadow:
+
+    0 12px 35px rgba(0,0,0,0.12);
+
+  cursor:pointer;
+
 }
 
 .log-container{
@@ -294,8 +300,14 @@ background: rgba(255,255,255,0.10);
 }
 
 .log-card:hover{
-  transform:translateY(-4px);
-  box-shadow: 0 0 20px rgba(255,182,193,0.2);
+  transform: translateY(-6px);
+
+  box-shadow:
+
+    0 12px 35px rgba(0,0,0,0.12);
+
+  cursor:pointer;
+
 }
 
 .log-card h2{
@@ -376,7 +388,14 @@ background: rgba(255,255,255,0.10);
 }
 
 .stat-card:hover{
-  transform:translateY(-4px);
+ transform: translateY(-6px);
+
+  box-shadow:
+
+    0 12px 35px rgba(0,0,0,0.12);
+
+  cursor:pointer;
+
 }
 
 .status{

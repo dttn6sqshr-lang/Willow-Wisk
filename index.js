@@ -27,7 +27,6 @@ client.once("ready", async () => {
   await client.guilds.fetch();
 
   updateStats();
-  autoLog("Bot Online", "Discord bot connected successfully");
 });
 
 /* ======================

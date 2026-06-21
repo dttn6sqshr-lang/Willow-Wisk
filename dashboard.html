@@ -15,113 +15,54 @@
 
     <div class="links">
       <a href="/home.html">Home</a>
-      <a href="/dashboard">Dashboard</a>
-      <a href="/features.html">Features</a>
+      <a href="/bakerylog.html">Bakery Log</a>
+      <a href="/status.html">Status</a>
     </div>
 
-    <div class="status" id="botStatus">
-  <span class="dot" id="statusDot"></span>
-  <span id="statusText">Checking...</span>
-</div>
+    <div class="status">
+      <span class="dot"></span>
+      Dashboard
+    </div>
 
   </div>
 </div>
 
-<section class="hero">
-  <h1>Select a Server</h1>
-  <p class="subtitle">choose a server to manage Willow Wisk</p>
+<!-- ONLY ONE HEADER -->
+<section class="dashboard-header">
+  <h1>Dashboard</h1>
+  <p class="subtitle">Select a server to manage your bot</p>
 </section>
 
-<section class="hero">
-  <h1>Select a Server</h1>
-  <p class="subtitle">choose a server to manage Willow Wisk</p>
-</section>
-
+<!-- SERVER GRID -->
 <section class="server-grid" id="serverGrid"></section>
 
 <script>
 async function loadGuilds() {
-  try {
-    const res = await fetch("/api/guilds");
+  const res = await fetch("/api/guilds");
+  const guilds = await res.json();
 
-    if (!res.ok) {
-      throw new Error("Guild API failed");
-    }
+  const grid = document.getElementById("serverGrid");
+  grid.innerHTML = "";
 
-    const guilds = await res.json();
+  guilds.forEach(g => {
+    const card = document.createElement("div");
+    card.className = "server-card";
 
-    const grid = document.getElementById("serverGrid");
-    grid.innerHTML = "";
+    card.innerHTML = `
+      <div style="font-weight:600">${g.name}</div>
+      <div style="opacity:0.6;font-size:12px">${g.members || 0} members</div>
+    `;
 
-    guilds.forEach(g => {
-      const card = document.createElement("div");
-      card.className = "server-card";
+    card.onclick = () => {
+      localStorage.setItem("selectedGuild", g.id);
+      window.location.href = "/server.html";
+    };
 
-      const icon = g.icon
-  ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png`
-  : "https://cdn.discordapp.com/embed/avatars/0.png";
-
-card.innerHTML = `
-  <div style="display:flex;align-items:center;gap:12px;">
-
-    <img src="${icon}"
-         style="width:45px;height:45px;border-radius:50%;">
-
-    <div>
-      <div style="font-weight:bold">${g.name}</div>
-      <div style="opacity:0.6;font-size:12px">
-        Click to manage
-      </div>
-    </div>
-
-  </div>
-`;
-
-      card.onclick = () => {
-  localStorage.setItem("selectedGuild", g.id);
-  window.location.href = "/server.html";
-};
-
-      grid.appendChild(card);
-    });
-
-  } catch (err) {
-    document.getElementById("serverGrid").innerHTML =
-      "<p>Failed loading servers.</p>";
-
-    console.log(err);
-  }
+    grid.appendChild(card);
+  });
 }
 
 loadGuilds();
-</script>
-
-<script>
-async function loadStatus() {
-  try {
-    const res = await fetch("/api/stats");
-    const data = await res.json();
-
-    const dot = document.getElementById("statusDot");
-    const text = document.getElementById("statusText");
-
-    if (!data || !data.servers) {
-      dot.style.background = "red";
-      text.innerText = "Offline";
-      return;
-    }
-
-    dot.style.background = "#4ade80";
-    text.innerText = "Online";
-
-  } catch (e) {
-    document.getElementById("statusDot").style.background = "red";
-    document.getElementById("statusText").innerText = "Offline";
-  }
-}
-
-loadStatus();
-setInterval(loadStatus, 15000);
 </script>
 
 </body>

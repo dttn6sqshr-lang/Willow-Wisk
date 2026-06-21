@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Server Panel • Willow Wisk</title>
+<title>Server Dashboard • Willow Wisk</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -10,45 +10,31 @@
 
 <div class="navbar">
   <div class="nav-pill">
-
     <div class="logo">🥐 ᰔ</div>
 
     <div class="links">
-      <a href="/home.html">Home</a>
-      <a href="/dashboard">Dashboard</a>
+      <a href="/dashboard">Back</a>
       <a href="/bakerylog.html">Bakery Log</a>
-      <a href="/status.html">Status</a>
     </div>
 
     <div class="status">
       <span class="dot"></span>
       Server Panel
     </div>
-
   </div>
 </div>
 
 <section class="hero">
-  <h1 id="serverName">Loading...</h1>
-  <p class="subtitle">server control panel</p>
+  <h1 id="serverName">Loading Server...</h1>
+  <p class="subtitle">manage modules & settings</p>
 </section>
 
-<section class="stats">
+<section class="info-cards">
 
-  <div class="stat">
-    <h2>Tickets</h2>
-    <p>Manage system</p>
-  </div>
-
-  <div class="stat">
-    <h2>Moderation</h2>
-    <p>Ban / mute tools</p>
-  </div>
-
-  <div class="stat">
-    <h2>Settings</h2>
-    <p>Bot configuration</p>
-  </div>
+  <div class="mini-card"> Tickets </div>
+  <div class="mini-card"> Moderation</div>
+  <div class="mini-card"> Verification</div>
+  <div class="mini-card"> Analytics</div>
 
 </section>
 
@@ -56,15 +42,24 @@
 const guildId = localStorage.getItem("selectedGuild");
 
 if (!guildId) {
-  document.getElementById("serverName").innerText = "No server selected";
-} else {
-  fetch("/api/guilds")
-    .then(res => res.json())
-    .then(guilds => {
-      const guild = guilds.find(g => g.id === guildId);
-      document.getElementById("serverName").innerText = guild ? guild.name : "Unknown Server";
-    });
+  window.location.href = "/dashboard";
 }
+
+async function loadServer() {
+  const res = await fetch("/api/guilds");
+  const guilds = await res.json();
+
+  const guild = guilds.find(g => g.id === guildId);
+
+  if (!guild) {
+    document.getElementById("serverName").innerText = "Server not found";
+    return;
+  }
+
+  document.getElementById("serverName").innerText = guild.name;
+}
+
+loadServer();
 </script>
 
 </body>

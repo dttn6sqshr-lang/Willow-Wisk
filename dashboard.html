@@ -56,12 +56,14 @@ async function loadGuilds() {
       <div class="server-members">${g.members || 0} members</div>
     </div>
   </div>
+
+  <button class="manage-btn">Manage</button>
 `;
 
-    card.onclick = () => {
-      localStorage.setItem("selectedGuild", g.id);
-      window.location.href = "/server.html";
-    };
+card.querySelector(".manage-btn").onclick = () => {
+  localStorage.setItem("selectedGuild", g.id);
+  window.location.href = "/server.html";
+};
 
     grid.appendChild(card);
   });

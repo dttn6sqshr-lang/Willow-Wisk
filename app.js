@@ -161,19 +161,28 @@ app.get("/api/guilds", async (req, res) => {
 
     const guilds = guildRes.data;
 
-    const filtered = guilds.filter(g => {
-      const perms = BigInt(g.permissions);
-      const ADMIN = 0x8n;
-      const MANAGE_GUILD = 0x20n;
+    const filtered = guilds
+  .filter(g => {
+    const perms = BigInt(g.permissions);
 
-      return (
-        (perms & ADMIN) === ADMIN ||
-        (perms & MANAGE_GUILD) === MANAGE_GUILD
-      );
-    });
+    const ADMIN = 0x8n;
+    const MANAGE_GUILD = 0x20n;
 
-    res.json(filtered);
+    return (
+      (perms & ADMIN) === ADMIN ||
+      (perms & MANAGE_GUILD) === MANAGE_GUILD
+    );
+  })
+  .map(g => ({
+    id: g.id,
+    name: g.name,
 
+    icon: g.icon
+      ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png?size=128`
+      : null
+  }));
+
+res.json(filtered);
   } catch (err) {
     console.log(err);
     res.json([]);

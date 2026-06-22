@@ -645,13 +645,17 @@ body::after{
 }
 
 .server-icon{
-  width:42px;
-  height:42px;
-  border-radius:12px;
+  width:72px;
+  height:72px;
+
+  border-radius:50%;
 
   object-fit:cover;
 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow:
+    0 4px 16px rgba(0,0,0,0.15);
+
+  margin: 0 auto;
 }
 
 .server-name{

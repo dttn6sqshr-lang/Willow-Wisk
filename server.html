@@ -10,31 +10,46 @@
 
 <div class="navbar">
   <div class="nav-pill">
+
     <div class="logo">🥐 ᰔ</div>
 
     <div class="links">
-      <a href="/dashboard">Back</a>
+      <a href="/dashboard">Dashboard</a>
       <a href="/bakerylog.html">Bakery Log</a>
+      <a href="/status.html">Status</a>
     </div>
 
     <div class="status">
       <span class="dot"></span>
-      Server Panel
+      Connected
     </div>
+
   </div>
 </div>
 
-<section class="hero">
-  <h1 id="serverName">Loading Server...</h1>
-  <p class="subtitle">manage modules & settings</p>
+<section class="server-header">
+
+  <img id="serverIcon" src="" class="big-server-icon">
+
+  <h1 id="serverName">Loading...</h1>
+
+  <p class="subtitle">Manage your server modules</p>
+
 </section>
 
-<section class="info-cards">
+<section class="module-grid">
 
-  <div class="mini-card"> Tickets </div>
-  <div class="mini-card"> Moderation</div>
-  <div class="mini-card"> Verification</div>
-  <div class="mini-card"> Analytics</div>
+  <div class="module-card">🎟 Tickets</div>
+
+  <div class="module-card">🔐 Verification</div>
+
+  <div class="module-card">📜 Logs</div>
+
+  <div class="module-card">🛠 Builder Studio</div>
+
+  <div class="module-card">🛡 Security</div>
+
+  <div class="module-card">⚙ Settings</div>
 
 </section>
 
@@ -52,11 +67,16 @@ async function loadServer() {
   const guild = guilds.find(g => g.id === guildId);
 
   if (!guild) {
-    document.getElementById("serverName").innerText = "Server not found";
+    document.getElementById("serverName").innerText =
+      "Server not found";
     return;
   }
 
-  document.getElementById("serverName").innerText = guild.name;
+  document.getElementById("serverName").innerText =
+    guild.name;
+
+  document.getElementById("serverIcon").src =
+    guild.icon || "https://via.placeholder.com/100";
 }
 
 loadServer();

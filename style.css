@@ -286,24 +286,13 @@ background: rgba(255,255,255,0.10);
 }
 
 .server-card{
-  padding:18px;
-  border-radius:16px;
-
-  background: rgba(255,255,255,0.10);
-  backdrop-filter: blur(16px);
-
-  border:1px solid rgba(255,255,255,0.12);
-
-  cursor:pointer;
-
-  transition: all 0.25s ease;
+  text-align:center;
 
   display:flex;
   flex-direction:column;
-  gap:6px;
+  align-items:center;
 
-  position:relative;
-  overflow:hidden;
+  padding:24px;
 }
 
 .server-card:hover{
@@ -640,7 +629,9 @@ body::after{
 
 .server-top{
   display:flex;
+  flex-direction:column;
   align-items:center;
+
   gap:12px;
 }
 
